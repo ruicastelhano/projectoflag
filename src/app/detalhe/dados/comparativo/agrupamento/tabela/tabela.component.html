@@ -11,11 +11,16 @@
     </tr>
   </thead>
     <tbody class="numeric-field">
-      <tr
-        *ngFor="let linha of dadosTabela">
-        <td class="text-center align-middle">{{ linha.label }}</td>
-        <td class="text-center align-middle"
-          *ngFor="let value of linha.data">{{ formatNumber(value) }}</td>
-      </tr>
+        <tr
+          *ngFor="let linha of dadosTabela">
+          <ng-template
+            [ngIf]="linha.data[0] !== 0">
+          <td class="text-center align-middle">{{ linha.label }}</td>
+          <td class="text-center align-middle"
+            *ngFor="let value of linha.data">{{ formatNumber(value) }}</td>
+          </ng-template>
+        </tr>
     </tbody>
 </table>
+
+

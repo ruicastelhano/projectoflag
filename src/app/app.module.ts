@@ -17,9 +17,11 @@ import { DadosComponent } from './detalhe/dados/dados.component';
 import { ComparativoComponent } from './detalhe/dados/comparativo/comparativo.component';
 import { AgrupamentoComponent } from './detalhe/dados/comparativo/agrupamento/agrupamento.component';
 import { TabelaComponent } from './detalhe/dados/comparativo/agrupamento/tabela/tabela.component';
-import { GraficoComponent } from './detalhe/dados/comparativo/agrupamento/grafico/grafico.component';
+import { GraficoComponent } from './detalhe/dados/comparativo/agrupamento/conjunto-graficos/grafico/grafico.component';
 import {ChartsModule} from 'ng2-charts';
 import {FormsModule} from '@angular/forms';
+import { BackgroundColorDirective } from './detalhe/directives/background-color.directive';
+import { ConjuntoGraficosComponent } from './detalhe/dados/comparativo/agrupamento/conjunto-graficos/conjunto-graficos.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import {FormsModule} from '@angular/forms';
     ComparativoComponent,
     AgrupamentoComponent,
     TabelaComponent,
-    GraficoComponent
+    GraficoComponent,
+    BackgroundColorDirective,
+    ConjuntoGraficosComponent
   ],
     imports: [
         BrowserModule,

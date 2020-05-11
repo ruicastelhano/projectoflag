@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Dado} from '../../../interfaces/dado';
 import {DadoAgrupamento} from '../../../interfaces/dado-agrupamento';
 import {ExtraAgrupamento} from '../../../interfaces/extra-agrupamento';
@@ -8,7 +8,7 @@ import {ExtraAgrupamento} from '../../../interfaces/extra-agrupamento';
   templateUrl: './agrupamento.component.html',
   styleUrls: ['./agrupamento.component.css']
 })
-export class AgrupamentoComponent implements OnInit, AfterViewInit {
+export class AgrupamentoComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() dadosAgrupamento: DadoAgrupamento[];
   @Input() extrasAgrupamento: ExtraAgrupamento;
   @Output() chartLabels = [];
@@ -19,6 +19,11 @@ export class AgrupamentoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // this.prepareChartData();
+    console.log(this.extrasAgrupamento);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(this.dadosAgrupamento);
     console.log(this.extrasAgrupamento);
   }
 

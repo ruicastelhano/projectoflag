@@ -1,5 +1,5 @@
 import {ActivatedRoute} from '@angular/router';
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { ModelosAPIService } from './services/modelos-api.service';
 import { Modelo } from './interfaces/modelo';
 import {Dado} from './interfaces/dado';
@@ -11,7 +11,6 @@ import {DadosGeral} from './interfaces/dados-geral';
   styleUrls: ['./detalhe.component.css']
 })
 export class DetalheComponent implements OnInit {
-  // Output para Dados
   @Output() slugProduto: string;
   dados: DadosGeral;
 
@@ -23,6 +22,7 @@ export class DetalheComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private modelosAPIService: ModelosAPIService) { }
+
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {

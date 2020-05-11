@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DadoAgrupamento} from '../../../../interfaces/dado-agrupamento';
 import {Extra} from '../../../../interfaces/extra';
 import {ExtraAgrupamento} from '../../../../interfaces/extra-agrupamento';
@@ -8,13 +8,16 @@ import {ExtraAgrupamento} from '../../../../interfaces/extra-agrupamento';
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css']
 })
-export class TabelaComponent implements OnInit {
+export class TabelaComponent implements OnInit, OnChanges{
   @Input() dadosTabela: DadoAgrupamento[];
   @Input() extrasTabela: ExtraAgrupamento;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
   }
 
   formatNumber = (num) => {
