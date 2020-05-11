@@ -1,15 +1,51 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { IntroComponent } from './intro/intro/intro.component';
+import { FiltroComponent } from './detalhe/filtro/filtro.component';
+import { AppRoutingModule } from './app-routing.module';
+import {RouterModule} from '@angular/router';
+import { MapaComponent } from './detalhe/filtro/mapa/mapa.component';
+import { DetalheComponent } from './detalhe/detalhe.component';
+import { FormComponent } from './detalhe/filtro/form/form.component';
+import { DadosComponent } from './detalhe/dados/dados.component';
+import { ComparativoComponent } from './detalhe/dados/comparativo/comparativo.component';
+import { AgrupamentoComponent } from './detalhe/dados/comparativo/agrupamento/agrupamento.component';
+import { TabelaComponent } from './detalhe/dados/comparativo/agrupamento/tabela/tabela.component';
+import { GraficoComponent } from './detalhe/dados/comparativo/agrupamento/grafico/grafico.component';
+import {ChartsModule} from 'ng2-charts';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    IntroComponent,
+    FiltroComponent,
+    MapaComponent,
+    DetalheComponent,
+    FormComponent,
+    DadosComponent,
+    ComparativoComponent,
+    AgrupamentoComponent,
+    TabelaComponent,
+    GraficoComponent
   ],
-  imports: [
-    BrowserModule
-  ],
+    imports: [
+        BrowserModule,
+        NgbModule,
+        AppRoutingModule,
+        RouterModule,
+        HttpClientModule,
+        ChartsModule,
+        FormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
