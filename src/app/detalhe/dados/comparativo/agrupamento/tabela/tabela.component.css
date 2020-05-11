@@ -1,0 +1,9 @@
+
+.numeric-field {
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+thead {
+  font-size: 80%;
+}

@@ -1,0 +1,66 @@
+<div class="row text-center align-middle mb-2 mt-4">
+  <button class="h4-btn global mr-2 ml-2 p-3 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #h4Global
+          (click)="active=0"
+          [ngClass]="{'btn-secondary text-white': active !== 0, 'btn-outline-secondary text-dark': active === 0}"
+          [disabled]="dadosGeral === undefined"
+  >Global</button>
+  <button class="h4-btn modelos mr-2 ml-2 p-3 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #btnModelos
+          (click)="active=1"
+          [ngClass]="{'btn-secondary text-white': active !== 1, 'btn-outline-secondary text-dark': active === 1}"
+          [disabled]="dadosGeral === undefined"
+  >Circuitos</button>
+  <button class="h4-btn turnos mr-2 ml-2 p-3 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #btnTurnos
+          (click)="active=2"
+          [ngClass]="{'btn-secondary text-white': active !== 2, 'btn-outline-secondary text-dark': active === 2}"
+          [disabled]="dadosGeral === undefined"
+          [disabled]="turno"
+  >Turnos</button>
+  <button class="h4-btn zonas mr-2 ml-2 p-3 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #btnZonas
+          (click)="active=3"
+          [ngClass]="{'btn-secondary text-white': active !== 3, 'btn-outline-secondary text-dark': active === 3}"
+          [disabled]="dadosGeral === undefined"
+  >Zonas</button>
+  <button class="h4-btn anual mr-2 ml-2 p-3 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #btnAnual
+          (click)="active=4"
+          [ngClass]="{'btn-secondary text-white': active !== 4, 'btn-outline-secondary text-dark': active === 4}"
+          [disabled]="dadosGeral === undefined"
+  >Anual</button>
+  <button class="h4-btn mensal mr-2 ml-2 p-3 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #btnMensal
+          (click)="active=5"
+          [ngClass]="{'btn-secondary text-white': active !== 5, 'btn-outline-secondary text-dark': active === 5}"
+          [disabled]="dadosGeral === undefined"
+  >Mensal</button>
+  <button class="h4-btn circuitos mr-2 ml-2 p-3 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #btnCircuitos
+          (click)="active=6"
+          [ngClass]="{'btn-secondary text-white': active !== 6, 'btn-outline-secondary text-dark': active === 6}"
+          [disabled]="dadosGeral === undefined"
+  >Listagem</button>
+</div>
+
+<!--<div class="comparativo"
+     #comparativoGlobal
+>
+  <app-comparativo
+    [dados]="dadosGeral['global_data']"
+    [extras]="dadosGeral['extras']"
+  ></app-comparativo>
+</div>-->
+
+<div class="comparativo"
+     #comparativo
+>
+  <app-comparativo
+    *ngIf="dadosGeral"
+    [slugProduto]="slugProduto"
+    [dados]="daodosComparativo"
+    [extras]="dadosGeral['extras']"
+  ></app-comparativo>
+</div>
+

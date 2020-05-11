@@ -1,0 +1,28 @@
+<div class="row text-center align-middle mb-2 mt-4">
+  <button class="h4-btn global mr-2 ml-2 p-1 btn-sm text-center btn btn-block text-uppercase col"
+          #btnSum
+          (click)="active=0"
+          [ngClass]="{'btn-secondary text-white': active !== 0, 'btn-outline-secondary text-dark': active === 0}"
+          [disabled]="dados === undefined"
+  >Acumulado</button>
+  <button class="h4-btn modelos mr-2 ml-2 p-1 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #btnAvg
+          (click)="active=1"
+          [ngClass]="{'btn-secondary text-white': active !== 1, 'btn-outline-secondary text-dark': active === 1}"
+          [disabled]="dados === undefined"
+  >Mèdias</button>
+  <button class="h4-btn turnos mr-2 ml-2 p-1 btn-sm text-center text-white btn btn-block text-uppercase col"
+          #btnRat
+          (click)="active=2"
+          [ngClass]="{'btn-secondary text-white': active !== 2, 'btn-outline-secondary text-dark': active === 2}"
+          [disabled]="dados === undefined"
+  >Rácios</button>
+</div>
+
+
+<app-agrupamento
+  [dadosAgrupamento]="dadosAgrupamento"
+  [extrasAgrupamento]="extraAgrupamento"
+>
+</app-agrupamento>
+

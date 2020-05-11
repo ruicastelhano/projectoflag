@@ -1,0 +1,64 @@
+<form>
+  <div class="form-group">
+    <label for="ano">Ano</label>
+    <select class="form-control" id="ano"
+        #anoElement
+        (change)="getData()"
+    >
+      <option>Todos (>=2018)</option>
+      <option
+        *ngFor="let ano of anos"
+      >{{ ano }}</option>
+    </select>
+
+    <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+  </div>
+  <div class="form-group">
+    <label for="mes">Mes</label>
+    <select class="form-control" id="mes"
+            #mesElement
+            (change)="getData()"
+    >
+      <option>Todos</option>
+      <option
+      *ngFor="let mes of meses"
+    >{{ mes }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="zona">Zona</label>
+    <select class="form-control" id="zona"
+            #zonaElement
+            (change)="getData()"
+    >
+      <option>Todas</option>
+      <option
+        *ngFor="let zona of zonas"
+      >{{ zona }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="turno">Turno</label>
+    <select class="form-control" id="turno"
+            #turnoElement
+            (change)="getData()"
+    >
+      <option>Todos</option>
+      <option
+        *ngFor="let turno of turnos"
+      >{{ turno }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="modelo">Modelo</label>
+    <select class="form-control" id="modelo"
+            #modeloElement
+            (change)="getData()"
+    >
+      <option>Todos</option>
+      <option
+        *ngFor="let modelo of modelos"
+      >{{ modelo.slug }}</option>
+    </select>
+  </div>
+</form>

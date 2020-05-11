@@ -1,0 +1,61 @@
+.nav-link {
+  font-size: 120%;
+  text-transform: uppercase;
+}
+
+.nav-link:hover {
+  font-weight: bold;
+  color: #b1b1b1;
+}
+
+.ws {
+  margin-right: 6px;
+}
+
+.ws .sub {
+  display: none;
+  position: fixed;
+  background-color: #171a1d;
+  color: white !important;
+  text-align: left;
+  z-index: 10000;
+}
+
+.ws .sub a {
+  transform: translateX(-40px);
+}
+
+.ws a {
+  text-decoration: none;
+  color: white !important;
+}
+
+.ws:hover .sub {
+  display: block;
+}
+
+li {
+  list-style-type: none;
+}
+
+.pwd_out {
+  position: absolute !important;
+  top: 11px;
+  right: 5%;
+}
+
+.nome {
+  position: absolute !important;
+  top: 35px;
+  left: 8%;
+}
+
+.no_pointer{
+  cursor: default !important;
+}
+
+.nav_div {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%
+}

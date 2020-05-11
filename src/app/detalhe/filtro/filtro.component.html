@@ -1,0 +1,17 @@
+
+<div class="row mt-5">
+  <div class="col-xl-4 col-sm-6">
+    <app-form
+      [slugProduto]="slugProduto"
+      [modelos]="modelos"
+      [zonas]="zonas"
+      [turnos]="turnos"
+      (dataChanged)="OnDataChanged($event)"
+    ></app-form>
+  </div>
+  <div class="col-xl-8 col-sm-6">
+    <app-mapa></app-mapa>
+  </div>
+</div>
+
+

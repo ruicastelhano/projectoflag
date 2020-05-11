@@ -1,0 +1,21 @@
+
+<table class="table table-striped table-hover table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th></th>
+      <ng-container
+        *ngIf="extrasTabela">
+        <th class="text-center align-middle text-uppercase"
+          *ngFor="let titulo of extrasTabela.titulos">{{ titulo }}</th>
+      </ng-container>
+    </tr>
+  </thead>
+    <tbody class="numeric-field">
+      <tr
+        *ngFor="let linha of dadosTabela">
+        <td class="text-center align-middle">{{ linha.label }}</td>
+        <td class="text-center align-middle"
+          *ngFor="let value of linha.data">{{ formatNumber(value) }}</td>
+      </tr>
+    </tbody>
+</table>

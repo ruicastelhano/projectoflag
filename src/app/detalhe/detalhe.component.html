@@ -1,0 +1,18 @@
+<section class="container">
+  <app-filtro
+    [slugProduto]="slugProduto"
+    [modelos]="modelos"
+    [zonas]="zonas"
+    [turnos]="turnos"
+    [geojsonObject]="geojsonObject"
+    (dataChanged)="OnDataChanged($event)"
+  ></app-filtro>
+</section>
+
+<section class="container">
+  <app-dados
+    *ngIf="dados"
+    [slugProduto]="slugProduto"
+    [dadosGeral]="dados"
+  ></app-dados>
+</section>

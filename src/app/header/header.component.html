@@ -1,0 +1,103 @@
+<!--<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" (click)="collapsed = !collapsed">
+        <span class="icon-bar" *ngFor="let iconBar of [1, 2, 3]"></span>
+      </button>
+      <a routerLink="/" class="navbar-brand">Recipe Book</a>
+    </div>
+    <div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Recipes</a></li>
+        <li><a href="#">Shopping List</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Save Data</a></li>
+            <li><a href="#">Fetch Data</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>-->
+
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark navbar-default navbar-static-top pb-3">
+  <div class="container-fluid vertical-center nav_div">
+    <ul class="nav mr-auto vertical-center text-white">
+      <a class="nav-brand mr-4" href="#">
+        <img alt="carot" title="Início" width="100%" src="../../favicon.ico"/>
+      </a>
+
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar1">
+        <ul class="navbar-nav nav nav-fill w-100">
+          <li class="ws">
+            <a class="nav-link" href="#">Recolha</a>
+            <ul class="sub">
+              <li><a class="nav-link" href="#">Registos</a></li>
+              <li><a class="nav-link" href="#">Indiferenciado</a></li>
+              <li><a class="nav-link" href="#">Papel</a></li>
+              <li><a class="nav-link" href="#">Plástico</a></li>
+              <li><a class="nav-link" href="#">Vidro</a></li>
+              <li><a class="nav-link" href="#">RUB</a></li>
+            </ul>
+          </li>
+          <li class="ws">
+            <a class="nav-link" href="#">Limpeza</a>
+            <ul class="sub">
+              <li><a class="nav-link" href="#">Cortes de jardim</a></li>
+              <li><a class="nav-link" href="#">Objectos fora de uso</a></li>
+              <li><a class="nav-link" href="#">Varredura</a></li>
+            </ul>
+          </li>
+          <li class="ws">
+            <a class="nav-link no_pointer" href="#">DOP</a>
+            <ul class="sub">
+              <li><a class="nav-link" href="#">Viaturas</a></li>
+              <li><a class="nav-link" href="#">Contentores</a></li>
+              <li><a class="nav-link" href="#">Descargas</a></li>
+              <li><a class="nav-link" href="#">Paragens</a></li>
+              <li><a class="nav-link" href="#">Lavagens</a></li>
+            </ul>
+          </li>
+          <li class="ws">
+            <a class="nav-link" href="#">GP</a>
+            <ul class="sub">
+              <li><a class="nav-link" href="#">Clientes</a></li>
+            </ul>
+          </li>
+          <li class="ws">
+            <a class="nav-link no_pointer" href="#">KPI</a>
+            <ul class="sub">
+              <li><a class="nav-link" href="#">Indicadores</a></li>
+              <li><a class="nav-link" href="#">AMTRES</a></li>
+            </ul>
+          </li>
+          <li class="ws">
+            <a class="nav-link no_pointer" href="#">BFA</a>
+            <ul class="sub">
+              <li><a class="nav-link" href="#">Fiscalização</a></li>
+              <li><a class="nav-link" href="#">Oleões</a></li>
+              <li><a class="nav-link" href="#">Desinfeções</a></li>
+            </ul>
+          </li>
+          <li class="ws">
+            <a class="nav-link" href="#">Tutor</a>
+            <ul class="sub">
+              <li><a class="nav-link" href="#">Tutores</a></li>
+              <li><a class="nav-link" href="#">Bairros</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+</nav>
