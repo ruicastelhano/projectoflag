@@ -23,7 +23,6 @@ export class DadosAPIService {
         params[`${par[1]}__isnull`] = 'True';
       }
     });
-    console.log(params);
     return this.httpClient.get(`${this.ENDPOINT}`, {params});
   }
 }

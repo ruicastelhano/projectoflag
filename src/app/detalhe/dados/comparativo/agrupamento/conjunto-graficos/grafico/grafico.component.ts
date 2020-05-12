@@ -1,8 +1,6 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
-import {ExtraAgrupamento} from '../../../../../interfaces/extra-agrupamento';
-import {DadoAgrupamento} from '../../../../../interfaces/dado-agrupamento';
+import {Color, Label} from 'ng2-charts';
 
 @Component({
   selector: 'app-grafico',
@@ -10,22 +8,42 @@ import {DadoAgrupamento} from '../../../../../interfaces/dado-agrupamento';
   styleUrls: ['./grafico.component.css']
 })
 export class GraficoComponent implements OnInit {
+  @Input() dados;
 
-  chartOptions = {
-    responsive: true
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          display: true,
+        },
+        scaleLabel: {
+          display: true,
+          labelString: null
+        }
+      }]
+    }
   };
-  chartData = [
-    { data: [330, 600, 260, 700], label: 'Account A' },
-    { data: [120, 455, 100, 340], label: 'Account B' },
-    { data: [45, 67, 800, 500], label: 'Account C' }
+  public barChartLabels: Label[];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
+  public barChartData: ChartDataSets[];
+
+  public barChartColors: Color[] = [
+    { backgroundColor: '#e67e22' },
   ];
-  chartLabels = ['January', 'February', 'Mars', 'April'];
 
+  constructor() { }
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.barChartLabels = this.dados.labels;
+    this.barChartData = [
+      { data: this.dados.data, label: this.dados.titulo },
+    ];
+    this.barChartOptions.scales.yAxes[0].scaleLabel.labelString = this.dados.legendaYAxis;
   }
 
 }

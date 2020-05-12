@@ -1,11 +1,11 @@
-
-<div class="col">
-  <canvas
-    baseChart
-    [chartType]="'line'"
-    [datasets]="chartData"
-    [labels]="chartLabels"
-    [options]="chartOptions"
-    [legend]="true">
+<div class="chart">
+  <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          [colors]="barChartColors">
   </canvas>
 </div>

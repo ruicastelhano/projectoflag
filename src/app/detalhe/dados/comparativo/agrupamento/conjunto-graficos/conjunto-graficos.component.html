@@ -1,1 +1,9 @@
-<p>conjunto-graficos works!</p>
+
+<div class="row">
+  <div class="col-4"
+       *ngFor="let dados of dadosF">
+        <app-grafico
+          [dados]="dados"
+        ></app-grafico>
+  </div>
+</div>
