@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {DadoAgrupamento} from '../../../../interfaces/dado-agrupamento';
-import {Extra} from '../../../../interfaces/extra';
-import {ExtraAgrupamento} from '../../../../interfaces/extra-agrupamento';
+import {DadoAgrupamento} from '../../interfaces/dado-agrupamento';
+import {Extra} from '../../interfaces/extra';
+import {ExtraAgrupamento} from '../../interfaces/extra-agrupamento';
 
 @Component({
   selector: 'app-tabela',

@@ -1,18 +1,20 @@
 import {ActivatedRoute} from '@angular/router';
-import {Component, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import { ModelosAPIService } from './services/modelos-api.service';
 import { Modelo } from './interfaces/modelo';
 import {Dado} from './interfaces/dado';
 import {DadosGeral} from './interfaces/dados-geral';
+import {Circuito} from './interfaces/circuito';
 
 @Component({
   selector: 'app-detalhe',
   templateUrl: './detalhe.component.html',
   styleUrls: ['./detalhe.component.css']
 })
-export class DetalheComponent implements OnInit {
+export class DetalheComponent implements OnInit, AfterViewInit {
   @Output() slugProduto: string;
   dados: DadosGeral;
+  circuitos: Circuito[];
 
   // Output para Filtro
   @Output() modelos: Modelo[] = [];
@@ -20,9 +22,17 @@ export class DetalheComponent implements OnInit {
   @Output() turnos: number[] = [];
   @Output() geojsonObject: object;
 
+  @ViewChild('toggleFiltroButton') toggleFiltroButton: ElementRef;
+  showFiltro = true;
+  texto = 'Esconder';
+
   constructor(private activatedRoute: ActivatedRoute,
               private modelosAPIService: ModelosAPIService) { }
 
+
+  ngAfterViewInit() {
+    this.toggleFiltroButton.nativeElement.addEventListener('click', this.toggleShowFiltro);
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -45,6 +55,21 @@ export class DetalheComponent implements OnInit {
 
   OnDataChanged = (data) => {
     this.dados = data;
+  }
+
+  OnCircuitosChanged = (data) => {
+    this.circuitos = data;
+  }
+
+  toggleShowFiltro = () => {
+    if (this.showFiltro) {
+      this.showFiltro = false;
+      this.texto = 'Mostrar';
+    }
+    else {
+      this.showFiltro = true;
+      this.texto = 'Esconder';
+    }
   }
 }
 

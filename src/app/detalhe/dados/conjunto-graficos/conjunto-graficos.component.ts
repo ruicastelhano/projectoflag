@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DadoAgrupamento} from '../../../../interfaces/dado-agrupamento';
-import {ExtraAgrupamento} from '../../../../interfaces/extra-agrupamento';
-import {DadosGraficos} from '../../../../interfaces/dados-graficos';
+import {DadoAgrupamento} from '../../interfaces/dado-agrupamento';
+import {ExtraAgrupamento} from '../../interfaces/extra-agrupamento';
 
 @Component({
   selector: 'app-conjunto-graficos',

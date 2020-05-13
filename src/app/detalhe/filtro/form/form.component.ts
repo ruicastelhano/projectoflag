@@ -2,6 +2,8 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outpu
 import {Modelo} from '../../interfaces/modelo';
 import {DadosAPIService} from '../../services/dados-api.service';
 import {Dado} from '../../interfaces/dado';
+import {CircuitosAPIService} from '../../services/circuitos-api.service';
+import {Circuito} from '../../interfaces/circuito';
 
 @Component({
   selector: 'app-form',
@@ -23,8 +25,10 @@ export class FormComponent implements OnInit, AfterViewInit {
   @ViewChild('modeloElement') modeloElement: ElementRef;
 
   @Output() dataChanged = new EventEmitter<Dado>();
+  @Output() circuitosChanged = new EventEmitter<Circuito[]>();
 
-  constructor(private dadosAPIService: DadosAPIService) {
+  constructor(private dadosAPIService: DadosAPIService,
+              private circuitosAPIService: CircuitosAPIService) {
     this.anos = [];
     this.meses = [];
     let ano = new Date().getFullYear();
@@ -54,6 +58,7 @@ export class FormComponent implements OnInit, AfterViewInit {
     let ano = null;
     let mes = null;
 
+
     if (!this.anoElement.nativeElement.value.includes('Tod')){
       ano = this.anoElement.nativeElement.value;
     }
@@ -70,9 +75,37 @@ export class FormComponent implements OnInit, AfterViewInit {
       slugModelo = this.modeloElement.nativeElement.value;
     }
 
-    this.dadosAPIService.getData(slugProduto, slugModelo, zona, turno, ano, mes).subscribe((data: any) => {
+    let anoLocal = null;
+    let mesLocal = null;
+    if (mes) {
+      anoLocal = parseInt(mes.substring(0, 4), 10);
+      mesLocal = parseInt(mes.substring(5, 7), 10);
+      this.anoElement.nativeElement.value = anoLocal;
+    }
+    else {
+      anoLocal = ano;
+      mesLocal = mes;
+    }
+
+    if (slugModelo) {
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.modelos.length; i++){
+        if (this.modelos[i].slug === slugModelo) {
+          this.turnoElement.nativeElement.value = this.modelos[i].turno;
+          this.zonaElement.nativeElement.value = this.modelos[i].zona;
+          break;
+        }
+      }
+    }
+
+    this.dadosAPIService.getData(slugProduto, slugModelo, zona, turno, anoLocal, mesLocal).subscribe((data: any) => {
       this.dataChanged.emit(data[0]);
     });
+
+    /*this.circuitosAPIService.getData(slugProduto, slugModelo, zona, turno, anoLocal, mesLocal).subscribe((data: any) => {
+      this.circuitosChanged.emit(data);
+      console.log(data);
+    });*/
   }
 
   ngOnInit(): void {

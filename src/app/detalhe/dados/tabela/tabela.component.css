@@ -7,3 +7,7 @@
 thead {
   font-size: 80%;
 }
+
+tbody {
+  line-height: 0.75;
+}

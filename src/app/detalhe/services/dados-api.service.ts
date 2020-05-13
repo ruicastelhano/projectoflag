@@ -11,7 +11,7 @@ export class DadosAPIService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getData(slugProduto: string, slugModelo: string, zona: number, turno: number, ano: number, mes: number) {
+  public getData(slugProduto: string, slugModelo: string, zona: number, turno: number, ano: number, mes: string) {
     const params = {};
     params['slug_produto'] = slugProduto;
     const arrayAux = [[slugModelo, 'slug_modelo'], [zona, 'zona'], [turno, 'turno'], [ano, 'ano'], [mes, 'mes']];

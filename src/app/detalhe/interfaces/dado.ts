@@ -1,7 +1,8 @@
-import {Linha} from './linha';
+
+import {DadoAgrupamento} from './dado-agrupamento';
 
 export interface Dado {
-  sum: Linha[];
-  avg: Linha[];
-  rat: Linha[];
+  sum: DadoAgrupamento[];
+  avg: DadoAgrupamento[];
+  rat: DadoAgrupamento[];
 }

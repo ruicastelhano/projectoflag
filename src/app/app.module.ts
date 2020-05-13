@@ -14,14 +14,21 @@ import { MapaComponent } from './detalhe/filtro/mapa/mapa.component';
 import { DetalheComponent } from './detalhe/detalhe.component';
 import { FormComponent } from './detalhe/filtro/form/form.component';
 import { DadosComponent } from './detalhe/dados/dados.component';
-import { ComparativoComponent } from './detalhe/dados/comparativo/comparativo.component';
-import { AgrupamentoComponent } from './detalhe/dados/comparativo/agrupamento/agrupamento.component';
-import { TabelaComponent } from './detalhe/dados/comparativo/agrupamento/tabela/tabela.component';
-import { GraficoComponent } from './detalhe/dados/comparativo/agrupamento/conjunto-graficos/grafico/grafico.component';
+import { TabelaComponent } from './detalhe/dados/tabela/tabela.component';
+import { GraficoComponent } from './detalhe/dados/conjunto-graficos/grafico/grafico.component';
 import {ChartsModule} from 'ng2-charts';
 import {FormsModule} from '@angular/forms';
 import { BackgroundColorDirective } from './detalhe/directives/background-color.directive';
-import { ConjuntoGraficosComponent } from './detalhe/dados/comparativo/agrupamento/conjunto-graficos/conjunto-graficos.component';
+import { ConjuntoGraficosComponent } from './detalhe/dados/conjunto-graficos/conjunto-graficos.component';
+import { ToggleDisplayDirective } from './detalhe/directives/toggle-display.directive';
+
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ListaCircuitosComponent } from './detalhe/dados/lista-circuitos/lista-circuitos.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +41,12 @@ import { ConjuntoGraficosComponent } from './detalhe/dados/comparativo/agrupamen
     DetalheComponent,
     FormComponent,
     DadosComponent,
-    ComparativoComponent,
-    AgrupamentoComponent,
     TabelaComponent,
     GraficoComponent,
     BackgroundColorDirective,
-    ConjuntoGraficosComponent
+    ConjuntoGraficosComponent,
+    ToggleDisplayDirective,
+    ListaCircuitosComponent
   ],
     imports: [
         BrowserModule,
@@ -49,6 +56,14 @@ import { ConjuntoGraficosComponent } from './detalhe/dados/comparativo/agrupamen
         HttpClientModule,
         ChartsModule,
         FormsModule,
+
+
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatProgressSpinnerModule,
+        NoopAnimationsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
