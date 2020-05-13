@@ -1,0 +1,17 @@
+
+<table class="table table-striped table-hover table-bordered">
+  <thead class="thead-dark">
+  <tr>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody class="numeric-field">
+  <tr
+    *ngFor="let circuito of circuitos">
+      <td class="text-center align-middle">{{ circuito.dia }}</td>
+      <td class="text-center align-middle">{{ circuito.inicio_time }}</td>
+      <td class="text-center align-middle">{{ circuito.fim_time }}</td>
+      <td class="text-center align-middle">{{ circuito.recolhas_count }}</td>
+  </tr>
+  </tbody>
+</table>
