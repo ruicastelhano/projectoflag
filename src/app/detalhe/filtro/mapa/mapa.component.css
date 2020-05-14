@@ -1,6 +1,9 @@
-@import "~leaflet/dist/leaflet.css";
 
+.map-frame {
+  border: 2px solid black;
+  height: 100%
+}
 
-#mapa {
-  height: 400px;
+#map {
+  height: 450px;
 }

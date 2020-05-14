@@ -4,6 +4,7 @@ import {DadosGeral} from '../interfaces/dados-geral';
 import {DadoAgrupamento} from '../interfaces/dado-agrupamento';
 import {ExtraAgrupamento} from '../interfaces/extra-agrupamento';
 import {Circuito} from '../interfaces/circuito';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-dados',
@@ -11,6 +12,9 @@ import {Circuito} from '../interfaces/circuito';
   styleUrls: ['./dados.component.css']
 })
 export class DadosComponent implements OnInit, AfterViewInit, OnChanges, AfterContentChecked {
+
+  constructor() {
+  }
   @Input() slugProduto: string = null;
   @Input() dados: DadosGeral;
   @Input() circuitos: Circuito[];
@@ -37,9 +41,6 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges, AfterCo
 
   @ViewChild('escolhaAgrupamento') escolhaAgrupamento: ElementRef;
 
-  constructor() {
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     this.activeComparativo = 0;
     if (this.escolhaAgrupamento) {
@@ -55,6 +56,7 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges, AfterCo
   }
 
   ngAfterViewInit(): void {
+
     this.escolhaAgrupamento.nativeElement.style.display = 'none';
 
     this.btnGlobal.nativeElement.addEventListener('click', () => {

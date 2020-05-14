@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header/header.component';
@@ -21,14 +21,11 @@ import {FormsModule} from '@angular/forms';
 import { BackgroundColorDirective } from './detalhe/directives/background-color.directive';
 import { ConjuntoGraficosComponent } from './detalhe/dados/conjunto-graficos/conjunto-graficos.component';
 import { ToggleDisplayDirective } from './detalhe/directives/toggle-display.directive';
-
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatInputModule} from '@angular/material/input';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ListaCircuitosComponent } from './detalhe/dados/lista-circuitos/lista-circuitos.component';
+import {MaterialModule} from './material.module';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+
 
 @NgModule({
   declarations: [
@@ -48,23 +45,19 @@ import { ListaCircuitosComponent } from './detalhe/dados/lista-circuitos/lista-c
     ToggleDisplayDirective,
     ListaCircuitosComponent
   ],
-    imports: [
-        BrowserModule,
-        NgbModule,
-        AppRoutingModule,
-        RouterModule,
-        HttpClientModule,
-        ChartsModule,
-        FormsModule,
-
-
-        MatInputModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatProgressSpinnerModule,
-        NoopAnimationsModule
-    ],
+  imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
+    NgbModule,
+    AppRoutingModule,
+    RouterModule,
+    HttpClientModule,
+    ChartsModule,
+    FormsModule,
+    MaterialModule,
+    MatPaginatorModule,
+    LeafletModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
