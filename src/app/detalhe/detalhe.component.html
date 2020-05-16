@@ -8,22 +8,27 @@
   ><span>{{ texto }}</span> base de análise/comparação</h4>
 
   <app-filtro
-    *ngIf="showFiltro"
+    *ngIf="showFiltro && slugProduto"
     [slugProduto]="slugProduto"
-    [modelos]="modelos"
-    [zonas]="zonas"
-    [turnos]="turnos"
-    [geojsonObject]="geojsonObject"
     (dataChanged)="OnDataChanged($event)"
-    (circuitosChanged)="OnCircuitosChanged($event)"
   ></app-filtro>
 </section>
 
 <section class="container">
   <app-dados
     *ngIf="dados"
-    [slugProduto]="slugProduto"
+    [estado]="estado"
     [dados]="dados"
-    [circuitos]="circuitos"
+    [slugProduto]="slugProduto"
   ></app-dados>
+</section>
+
+<section class="container">
+  <div class="row justify-content-center">
+  <div
+    class="col text-center p-5"
+    *ngIf="!dados">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  </div>
 </section>

@@ -4,6 +4,7 @@ import {DadosAPIService} from '../../services/dados-api.service';
 import {Dado} from '../../interfaces/dado';
 import {CircuitosAPIService} from '../../services/circuitos-api.service';
 import {Circuito} from '../../interfaces/circuito';
+import {Estado} from '../../interfaces/estado';
 
 @Component({
   selector: 'app-form',
@@ -17,6 +18,7 @@ export class FormComponent implements OnInit, AfterViewInit {
   @Input() zonas: number[] = [];
   @Input() turnos: number[] = [];
   @Input() modelos: Modelo[] = [];
+  estado: Estado;
 
   @ViewChild('anoElement') anoElement: ElementRef;
   @ViewChild('mesElement') mesElement: ElementRef;
@@ -24,40 +26,21 @@ export class FormComponent implements OnInit, AfterViewInit {
   @ViewChild('turnoElement') turnoElement: ElementRef;
   @ViewChild('modeloElement') modeloElement: ElementRef;
 
-  @Output() dataChanged = new EventEmitter<Dado>();
-  @Output() circuitosChanged = new EventEmitter<Circuito[]>();
+  @Output() dataChanged = new EventEmitter<Estado>();
 
-  constructor(private dadosAPIService: DadosAPIService,
-              private circuitosAPIService: CircuitosAPIService) {
-    this.anos = [];
-    this.meses = [];
-    let ano = new Date().getFullYear();
-    this.anos.push(ano);
-    for (let i = new Date().getMonth() + 1; i > 0; i--){
-      this.meses.push(`${ano}/${i.toString().padStart(2, '0')}`);
-    }
-    ano--;
-    while (ano >= 2018 ){
-      this.anos.push(ano);
-      for (let i = 12; i > 0; i--){
-        this.meses.push(`${ano}/${i.toString().padStart(2, '0')}`);
-      }
-      ano--;
-    }
+  constructor() {
   }
 
   ngAfterViewInit(): void {
-    this.getData();
+    this.getEstado();
   }
 
-  getData(){
-    const slugProduto = this.slugProduto;
+  getEstado(){
     let slugModelo = null;
     let zona = null;
     let turno = null;
     let ano = null;
     let mes = null;
-
 
     if (!this.anoElement.nativeElement.value.includes('Tod')){
       ano = this.anoElement.nativeElement.value;
@@ -87,6 +70,12 @@ export class FormComponent implements OnInit, AfterViewInit {
       mesLocal = mes;
     }
 
+    this.estado.ano = anoLocal;
+    this.estado.mes = mesLocal;
+    this.estado.turno = turno;
+    this.estado.zona = zona;
+    this.estado.slugModelo = slugModelo;
+
     if (slugModelo) {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.modelos.length; i++){
@@ -98,16 +87,34 @@ export class FormComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.dadosAPIService.getData(slugProduto, slugModelo, zona, turno, anoLocal, mesLocal).subscribe((data: any) => {
-      this.dataChanged.emit(data[0]);
-    });
-
-    this.circuitosAPIService.getData(slugProduto, slugModelo, zona, turno, anoLocal, mesLocal).subscribe((data: any) => {
-      this.circuitosChanged.emit(data);
-    });
+    this.dataChanged.emit(this.estado);
   }
 
   ngOnInit(): void {
+    this.estado = {
+      slugProduto: this.slugProduto,
+      ano: null,
+      mes: null,
+      zona: null,
+      turno: null,
+      slugModelo: null,
+    };
+
+    this.anos = [];
+    this.meses = [];
+    let ano = new Date().getFullYear();
+    this.anos.push(ano);
+    for (let i = new Date().getMonth() + 1; i > 0; i--){
+      this.meses.push(`${ano}/${i.toString().padStart(2, '0')}`);
+    }
+    ano--;
+    while (ano >= 2018 ){
+      this.anos.push(ano);
+      for (let i = 12; i > 0; i--){
+        this.meses.push(`${ano}/${i.toString().padStart(2, '0')}`);
+      }
+      ano--;
+    }
   }
 
 

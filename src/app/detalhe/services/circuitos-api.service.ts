@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {GeoJSON} from '../interfaces/geo-json';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class CircuitosAPIService {
 
   constructor(private httpClient: HttpClient) {
   }
+
+
 
   public getData(slugProduto: string, slugModelo: string, zona: number, turno: number, ano: number, mes: number) {
     const params = {};

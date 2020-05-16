@@ -45,19 +45,19 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
     ToggleDisplayDirective,
     ListaCircuitosComponent
   ],
-  imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    NgbModule,
-    AppRoutingModule,
-    RouterModule,
-    HttpClientModule,
-    ChartsModule,
-    FormsModule,
-    MaterialModule,
-    MatPaginatorModule,
-    LeafletModule,
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        BrowserModule,
+        NgbModule,
+        AppRoutingModule,
+        RouterModule,
+        HttpClientModule,
+        ChartsModule,
+        FormsModule,
+        MaterialModule,
+        MatPaginatorModule,
+        LeafletModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

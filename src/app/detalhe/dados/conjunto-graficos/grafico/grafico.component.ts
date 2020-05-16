@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {AfterViewChecked, Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import {Color, Label} from 'ng2-charts';
 
@@ -7,7 +7,7 @@ import {Color, Label} from 'ng2-charts';
   templateUrl: './grafico.component.html',
   styleUrls: ['./grafico.component.css']
 })
-export class GraficoComponent implements OnInit {
+export class GraficoComponent implements OnInit, OnChanges {
   @Input() dados;
 
   public barChartOptions: ChartOptions = {
@@ -39,6 +39,13 @@ export class GraficoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.render();
+  }
+
+  render = () => {
     this.barChartLabels = this.dados.labels;
     this.barChartData = [
       { data: this.dados.data, label: this.dados.titulo },

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DadoAgrupamento} from '../../interfaces/dado-agrupamento';
 import {ExtraAgrupamento} from '../../interfaces/extra-agrupamento';
 
@@ -7,7 +7,7 @@ import {ExtraAgrupamento} from '../../interfaces/extra-agrupamento';
   templateUrl: './conjunto-graficos.component.html',
   styleUrls: ['./conjunto-graficos.component.css']
 })
-export class ConjuntoGraficosComponent implements OnInit {
+export class ConjuntoGraficosComponent implements OnInit, OnChanges {
   @Input() dadosAgrupamento: DadoAgrupamento[];
   @Input() extraAgrupamento: ExtraAgrupamento;
 
@@ -20,6 +20,20 @@ export class ConjuntoGraficosComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.transformData();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.transformData();
+  }
+
+  transformData = () => {
+    this.dadosGraficos = [];
+    this.labels = [];
+    this.titulos = [];
+    this.legendaYAxis = [];
+    this.dadosF = [];
+
     this.dadosGraficos = new Array(this.dadosAgrupamento[0].data.length);
     for (let i = 0; i < this.dadosGraficos.length; i++) {
       this.dadosGraficos[i] = new Array(this.dadosAgrupamento.length);

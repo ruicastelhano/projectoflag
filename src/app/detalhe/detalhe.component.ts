@@ -6,6 +6,8 @@ import {Dado} from './interfaces/dado';
 import {DadosGeral} from './interfaces/dados-geral';
 import {Circuito} from './interfaces/circuito';
 import {GeoJSON} from './interfaces/geo-json';
+import {Estado} from './interfaces/estado';
+import {DadosService} from './services/dados.service';
 
 @Component({
   selector: 'app-detalhe',
@@ -16,19 +18,14 @@ export class DetalheComponent implements OnInit, AfterViewInit {
   @Output() slugProduto: string;
   dados: DadosGeral;
   circuitos: Circuito[];
-
-  // Output para Filtro
-  @Output() modelos: Modelo[] = [];
-  @Output() zonas: number[] = [];
-  @Output() turnos: number[] = [];
-  @Output() geojsonObject: GeoJSON;
+  estado: Estado;
 
   @ViewChild('toggleFiltroButton') toggleFiltroButton: ElementRef;
   showFiltro = true;
   texto = 'Esconder';
 
   constructor(private activatedRoute: ActivatedRoute,
-              private modelosAPIService: ModelosAPIService) { }
+              private dadosService: DadosService) { }
 
 
   ngAfterViewInit() {
@@ -39,29 +36,32 @@ export class DetalheComponent implements OnInit, AfterViewInit {
     this.activatedRoute.params.subscribe(params => {
       this.slugProduto = params.slug;
     });
-    this.getData();
-  }
-
-  getData(){
-    this.modelosAPIService.getData(this.slugProduto)
-      .subscribe((data: any) => {
-      this.geojsonObject = data;
-      data.features.forEach(modelo => {
-        this.modelos.push({slug: modelo.properties.slug, produto: modelo.properties.produto, turno: modelo.properties.turno,
-          zona: modelo.properties.zona});
-      });
-      this.zonas = Array.from(new Set(this.modelos.map(modelo => modelo.zona)));
-      this.turnos = Array.from(new Set(this.modelos.map(modelo => modelo.turno)));
-    });
+    this.estado = {
+      slugProduto: this.slugProduto,
+      ano: null,
+      mes: null,
+      zona: null,
+      turno: null,
+      slugModelo: null,
+    };
+    this.getDadosData();
   }
 
   OnDataChanged = (data) => {
-    this.dados = data;
+    this.estado = data;
+    this.getDadosData();
   }
 
-  OnCircuitosChanged = (data) => {
-    this.circuitos = data;
-    console.log(this.circuitos);
+  getDadosData = () => {
+    this.dadosService.getDataDados(
+      this.estado.slugProduto,
+      this.estado.slugModelo,
+      this.estado.zona,
+      this.estado.turno,
+      this.estado.ano,
+      this.estado.mes).subscribe((data: any) => {
+      this.dados = data[0];
+    });
   }
 
   toggleShowFiltro = () => {

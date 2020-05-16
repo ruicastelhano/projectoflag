@@ -1,30 +1,40 @@
-import {AfterContentChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {Dado} from '../interfaces/dado';
 import {DadosGeral} from '../interfaces/dados-geral';
 import {DadoAgrupamento} from '../interfaces/dado-agrupamento';
 import {ExtraAgrupamento} from '../interfaces/extra-agrupamento';
 import {Circuito} from '../interfaces/circuito';
 import {MatTableDataSource} from '@angular/material/table';
+import {Estado} from '../interfaces/estado';
+import {DadosService} from '../services/dados.service';
 
 @Component({
   selector: 'app-dados',
   templateUrl: './dados.component.html',
   styleUrls: ['./dados.component.css']
 })
-export class DadosComponent implements OnInit, AfterViewInit, OnChanges, AfterContentChecked {
-
-  constructor() {
-  }
-  @Input() slugProduto: string = null;
+export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
+  @Input() slugProduto: string; // Para retirar
+  @Input() estado: Estado;
   @Input() dados: DadosGeral;
-  @Input() circuitos: Circuito[];
-
   daodosComparativo: Dado;
   dadosAgrupamento: DadoAgrupamento[];
   extraAgrupamento: ExtraAgrupamento;
-
   activeComparativo = 0;
   activeAgrupamento: number;
+
+  circuitos: Circuito[];
 
   @ViewChild('btnGlobal') btnGlobal: ElementRef;
   @ViewChild('btnModelos') btnModelos: ElementRef;
@@ -40,21 +50,38 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges, AfterCo
 
   @ViewChild('escolhaAgrupamento') escolhaAgrupamento: ElementRef;
 
+  constructor(private dadosService: DadosService) {}
+
   ngOnChanges(changes: SimpleChanges) {
     this.activeComparativo = 0;
     if (this.escolhaAgrupamento) {
       this.escolhaAgrupamento.nativeElement.style.display = 'none';
     }
+    this.getDadosCircuitos();
   }
 
   ngOnInit(): void {
   }
 
-  ngAfterContentChecked(): void {
+  ngAfterViewInit(): void {
+    this.prepareDOM();
   }
 
-  ngAfterViewInit(): void {
+  getDadosCircuitos = () => {
+    this.circuitos = null;
+    this.dadosService.getDataCircutos(
+      this.estado.slugProduto,
+      this.estado.slugModelo,
+      this.estado.zona,
+      this.estado.turno,
+      this.estado.ano,
+      this.estado.mes).subscribe((data: any) => {
+      this.circuitos = data;
+    });
+    console.log(this.circuitos);
+  }
 
+  prepareDOM = () => {
     this.escolhaAgrupamento.nativeElement.style.display = 'none';
 
     this.btnGlobal.nativeElement.addEventListener('click', () => {
@@ -76,7 +103,7 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges, AfterCo
     this.btnSum.nativeElement.addEventListener('click', this.addBtnAgrupamentoListener.bind(this, 'sum', 1));
     this.btnAvg.nativeElement.addEventListener('click', this.addBtnAgrupamentoListener.bind(this, 'avg', 2));
     this.btnRat.nativeElement.addEventListener('click', this.addBtnAgrupamentoListener.bind(this, 'rat', 3));
-  }
+    }
 
   addBtnComparativoListener = (tipo, int) => {
     this.daodosComparativo = this.dados[tipo];

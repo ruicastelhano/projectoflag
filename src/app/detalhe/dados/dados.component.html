@@ -1,43 +1,37 @@
+
 <div class="row text-center align-middle mb-2 mt-4">
   <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
           #btnGlobal
           appBackgroundColor [slugProduto]="slugProduto" [index]="0" [activeComparativo]="activeComparativo"
-          [disabled]="dados === undefined"
   >Global</button>
   <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['slug_modelo']"
           #btnModelos
           appBackgroundColor [slugProduto]="slugProduto" [index]="1" [activeComparativo]="activeComparativo"
-          [disabled]="dados === undefined"
   >Circuitos</button>
   <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['slug_modelo'] && !dados['turno']"
           #btnTurnos
           appBackgroundColor [slugProduto]="slugProduto" [index]="2" [activeComparativo]="activeComparativo"
-          [disabled]="dados === undefined"
   >Turnos</button>
   <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['slug_modelo'] && !dados['zona']"
           #btnZonas
           appBackgroundColor [slugProduto]="slugProduto" [index]="3" [activeComparativo]="activeComparativo"
-          [disabled]="dados === undefined"
   >Zonas</button>
   <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['ano']"
           #btnAnual
           appBackgroundColor [slugProduto]="slugProduto" [index]="4" [activeComparativo]="activeComparativo"
-          [disabled]="dados === undefined"
   >Anual</button>
   <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['mes']"
           #btnMensal
           appBackgroundColor [slugProduto]="slugProduto" [index]="5" [activeComparativo]="activeComparativo"
-          [disabled]="dados === undefined"
   >Mensal</button>
   <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
           #btnCircuitos
           appBackgroundColor [slugProduto]="slugProduto" [index]="6" [activeComparativo]="activeComparativo"
-          [disabled]="dados === undefined"
   >Listagem</button>
 </div>
 
@@ -47,17 +41,14 @@
   <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           #btnSum
           [ngClass]="{'btn-dark': activeAgrupamento === 1, 'btn-outline-dark': activeAgrupamento !== 1}"
-          [disabled]="!activeComparativo"
   >Acumulado</button>
   <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           #btnAvg
           [ngClass]="{'btn-dark': activeAgrupamento === 2, 'btn-outline-dark': activeAgrupamento !== 2}"
-          [disabled]="!activeComparativo"
   >Mèdias</button>
   <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           #btnRat
           [ngClass]="{'btn-dark': activeAgrupamento === 3, 'btn-outline-dark': activeAgrupamento !== 3}"
-          [disabled]="!activeComparativo"
   >Rácios</button>
 </div>
 
@@ -91,12 +82,13 @@
   *ngIf="activeComparativo!==0 && activeComparativo!==6">
 
   <div class="table-responsive">
+</div>
     <app-tabela
       *ngIf="activeAgrupamento"
       [dadosTabela]="dadosAgrupamento"
       [extrasTabela]="extraAgrupamento"
     ></app-tabela>
-  </div>
+</div>
 
   <div class="row justify-content-center">
     <app-conjunto-graficos
@@ -106,16 +98,26 @@
     ></app-conjunto-graficos>
   </div>
 
-</div>
-
 <div
   *ngIf="activeComparativo==6">
 
   <div class="table-responsive">
     <app-lista-circuitos
+      *ngIf="circuitos"
       [circuitos]="circuitos"
     ></app-lista-circuitos>
   </div>
 
+  <section class="container">
+    <div class="row justify-content-center">
+      <div
+        class="col text-center p-5"
+        *ngIf="!circuitos">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
+    </div>
+  </section>
+
 </div>
+
 
