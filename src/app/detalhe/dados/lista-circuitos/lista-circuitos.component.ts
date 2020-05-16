@@ -20,13 +20,13 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   constructor() { }
 
   ngAfterViewInit() {
+  }
+
+  ngOnInit(): void {
     this.dataSource.data = this.circuitos;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.columns = Object.keys(this.circuitos[0]);
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges) {
