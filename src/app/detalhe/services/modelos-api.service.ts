@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {GeoJSON} from '../interfaces/geo-json';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,6 @@ export class ModelosAPIService {
   }
 
   public getData(slug: string) {
-    return this.httpClient.get(`${this.ENDPOINT}${slug}/`);
+    return this.httpClient.get<GeoJSON>(`${this.ENDPOINT}${slug}/`);
   }
 }

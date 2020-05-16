@@ -18,7 +18,6 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges, AfterCo
   @Input() slugProduto: string = null;
   @Input() dados: DadosGeral;
   @Input() circuitos: Circuito[];
-  cTeste: Circuito[];
 
   daodosComparativo: Dado;
   dadosAgrupamento: DadoAgrupamento[];
@@ -46,7 +45,6 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges, AfterCo
     if (this.escolhaAgrupamento) {
       this.escolhaAgrupamento.nativeElement.style.display = 'none';
     }
-    this.cTeste = this.circuitos;
   }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 import {Component, OnInit, AfterViewInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 import * as L from 'leaflet';
 import {LeafletLayerDirective} from '@asymmetrik/ngx-leaflet';
+import {GeoJSON} from '../../interfaces/geo-json';
 
 @Component({
   selector: 'app-mapa',
@@ -9,19 +10,7 @@ import {LeafletLayerDirective} from '@asymmetrik/ngx-leaflet';
 })
 export class MapaComponent implements OnInit, AfterViewInit, OnChanges{
   mapa;
-  @Input() geojsonObject:
-    {
-      type: 'FeatureCollection',
-      features: {
-        properties: object,
-        type: 'Feature',
-        geometry: {
-          type: 'Polygon' | 'MultiPolygon',
-          coordinates: number[][] | number[]
-        }
-      }
-    };
-
+  @Input() geojsonObject: GeoJSON;
   layer: any;
 
   constructor() { }

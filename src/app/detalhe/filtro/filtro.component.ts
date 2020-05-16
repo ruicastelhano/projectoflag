@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Modelo} from '../interfaces/modelo';
 import {Dado} from '../interfaces/dado';
 import {Circuito} from '../interfaces/circuito';
+import {GeoJSON} from '../interfaces/geo-json';
 
 @Component({
   selector: 'app-filtro',
@@ -13,7 +14,7 @@ export class FiltroComponent implements OnInit {
   @Input() modelos: Modelo[];
   @Input() zonas: number[];
   @Input() turnos: number[];
-  @Input() geojsonObject: object;
+  @Input() geojsonObject: GeoJSON;
 
   @Output() dataChanged = new EventEmitter<Dado>();
   @Output() circuitosChanged = new EventEmitter<Circuito[]>();

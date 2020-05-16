@@ -5,6 +5,7 @@ import { Modelo } from './interfaces/modelo';
 import {Dado} from './interfaces/dado';
 import {DadosGeral} from './interfaces/dados-geral';
 import {Circuito} from './interfaces/circuito';
+import {GeoJSON} from './interfaces/geo-json';
 
 @Component({
   selector: 'app-detalhe',
@@ -20,7 +21,7 @@ export class DetalheComponent implements OnInit, AfterViewInit {
   @Output() modelos: Modelo[] = [];
   @Output() zonas: number[] = [];
   @Output() turnos: number[] = [];
-  @Output() geojsonObject: object;
+  @Output() geojsonObject: GeoJSON;
 
   @ViewChild('toggleFiltroButton') toggleFiltroButton: ElementRef;
   showFiltro = true;
@@ -42,7 +43,8 @@ export class DetalheComponent implements OnInit, AfterViewInit {
   }
 
   getData(){
-    this.modelosAPIService.getData(this.slugProduto).subscribe((data: any) => {
+    this.modelosAPIService.getData(this.slugProduto)
+      .subscribe((data: any) => {
       this.geojsonObject = data;
       data.features.forEach(modelo => {
         this.modelos.push({slug: modelo.properties.slug, produto: modelo.properties.produto, turno: modelo.properties.turno,
@@ -59,6 +61,7 @@ export class DetalheComponent implements OnInit, AfterViewInit {
 
   OnCircuitosChanged = (data) => {
     this.circuitos = data;
+    console.log(this.circuitos);
   }
 
   toggleShowFiltro = () => {

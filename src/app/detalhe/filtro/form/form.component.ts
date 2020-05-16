@@ -102,10 +102,9 @@ export class FormComponent implements OnInit, AfterViewInit {
       this.dataChanged.emit(data[0]);
     });
 
-    /*this.circuitosAPIService.getData(slugProduto, slugModelo, zona, turno, anoLocal, mesLocal).subscribe((data: any) => {
+    this.circuitosAPIService.getData(slugProduto, slugModelo, zona, turno, anoLocal, mesLocal).subscribe((data: any) => {
       this.circuitosChanged.emit(data);
-      console.log(data);
-    });*/
+    });
   }
 
   ngOnInit(): void {

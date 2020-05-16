@@ -15,7 +15,6 @@ export class TabelaComponent implements OnInit, OnChanges, AfterViewInit{
   @Input() dadosTabela: DadoAgrupamento[];
   @Input() extrasTabela: ExtraAgrupamento;
   dataSource = new MatTableDataSource<DadoAgrupamento>();
-  sortedData;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,7 +35,6 @@ export class TabelaComponent implements OnInit, OnChanges, AfterViewInit{
     this.dataSource.data = this.dadosTabela;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    console.log(this.dadosTabela);
   }
 
   doFIlter = (value: string) => {
