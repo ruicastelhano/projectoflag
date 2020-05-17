@@ -2,7 +2,10 @@ import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewC
 import {Circuito} from '../../interfaces/circuito';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
+import {Estado} from '../../interfaces/estado';
+import {Subject} from 'rxjs';
+import {DadosService} from '../../services/dados.service';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-lista-circuitos',
@@ -10,29 +13,59 @@ import {MatPaginator} from '@angular/material/paginator';
   styleUrls: ['./lista-circuitos.component.css']
 })
 export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges{
-  @Input() circuitos: Circuito[];
+  @Input() estado: Estado;
+  circuitos: Circuito[];
   dataSource = new MatTableDataSource<Circuito>();
   columns: string[];
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  error = null;
+  ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  constructor() { }
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private dadosService: DadosService) { }
 
   ngAfterViewInit() {
+    this.getDadosCircuitos();
   }
 
   ngOnInit(): void {
-    this.dataSource.data = this.circuitos;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.columns = Object.keys(this.circuitos[0]);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.dataSource.data = this.circuitos;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    console.log(this.estado);
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+    this.getDadosCircuitos();
+  }
+
+  getDadosCircuitos = () => {
+    this.circuitos = null;
+    this.dataSource.data = null;
+    this.dadosService
+      .getDataCircutos(
+        this.estado.slugProduto,
+        this.estado.slugModelo,
+        this.estado.zona,
+        this.estado.turno,
+        this.estado.ano,
+        this.estado.mes)
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe((data: any) => {
+          this.circuitos = data.results;
+          console.log(data);
+          this.dataSource.data = this.circuitos;
+          this.dataSource.sort = this.sort;
+          this.columns = Object.keys(this.circuitos[0]);
+        },
+        error => {
+          this.error = error.message;
+        });
+  }
+
+  onHandleErro = () => {
+    this.error = null;
+    this.getDadosCircuitos();
   }
 
   doFIlter = (value: string) => {

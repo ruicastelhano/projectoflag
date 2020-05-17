@@ -1,26 +1,49 @@
 
 
-<mat-form-field>
-  <input matInput type="text" (keyup)="doFIlter($event.target.value)" placeholder="Filtrar">
-</mat-form-field>
-
-<mat-table [dataSource]="dataSource" matSort>
-
-  <ng-container
-    *ngFor="let column of columns"
-    matColumnDef="{{column}}">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element[column] }}</mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: columns"></mat-row>
-</mat-table>
+<div class="alert alert-danger p-5"
+     *ngIf="error">
+  <h2>Ocorreu um erro na pesquisa de dados!!!</h2>
+  <p>{{ error }}</p>
+  <button class="btn btn-danger" (click)="onHandleErro()">Tentar de novo</button>
+</div>
 
 
-<mat-paginator
-  #paginator
-  [pageSize]="10"
-  [pageSizeOptions]="[5, 10, 20, 50]">
-</mat-paginator>
+<section class="container">
+  <div class="row justify-content-center">
+    <div
+      class="col text-center p-5"
+      *ngIf="!circuitos && !error">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+</section>
+
+<div
+  *ngIf="circuitos">
+
+  <mat-form-field>
+    <input matInput type="text" (keyup)="doFIlter($event.target.value)" placeholder="Filtrar">
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container
+      *ngFor="let column of columns"
+      matColumnDef="{{column}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element[column] }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns"></mat-row>
+  </mat-table>
+
+
+  <mat-paginator
+    #paginator
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20, 50]">
+  </mat-paginator>
+
+</div>
 
