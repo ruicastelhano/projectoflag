@@ -15,23 +15,24 @@ export class TabelaComponent implements OnInit, OnChanges, AfterViewInit{
   @Input() dadosTabela: DadoAgrupamento[];
   @Input() extrasTabela: ExtraAgrupamento;
   dataSource = new MatTableDataSource<DadoAgrupamento>();
+  @Input() simples: boolean;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngAfterViewInit() {
-    this.dataSource.data = this.dadosTabela;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.getData();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
+    this.getData();
+  }
+
+  getData = () => {
     this.dataSource.data = this.dadosTabela;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

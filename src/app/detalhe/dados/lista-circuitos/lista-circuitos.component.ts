@@ -55,8 +55,10 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
         this.estado.mes)
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe((data: any) => {
+          data.results.forEach(row => {
+            delete row.circuito;
+          });
           this.circuitos = data.results;
-          console.log(data);
           this.dataSource.data = this.circuitos;
           this.dataSource.sort = this.sort;
           this.columns = Object.keys(this.circuitos[0]);
@@ -85,8 +87,10 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
     this.dadosService.getDataCircutosNextPrevious(url)
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe((data: any) => {
+          data.results.forEach(row => {
+            delete row.circuito;
+          });
           this.circuitos = data.results;
-          console.log(data);
           this.dataSource.data = this.circuitos;
           this.dataSource.sort = this.sort;
           this.columns = Object.keys(this.circuitos[0]);

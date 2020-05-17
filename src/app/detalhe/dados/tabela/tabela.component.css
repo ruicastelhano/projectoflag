@@ -4,10 +4,22 @@
   white-space: nowrap;
 }
 
-thead {
-  font-size: 80%;
+mat-header-cell, mat-cell {
+  justify-content: center;
 }
 
-tbody {
-  line-height: 0.75;
+.mat-row:nth-child(even){
+  background-color:#ececec;
+}
+
+.mat-row:nth-child(odd){
+  background-color:#fafafa;
+}
+
+.mat-cell:first-child{
+}
+
+.mat-header-cell {
+  background: #171a1d;
+  color: white;
 }

@@ -1,5 +1,7 @@
 
-<mat-form-field>
+
+<mat-form-field
+  *ngIf="!simples">
   <input matInput type="text" (keyup)="doFIlter($event.target.value)" placeholder="Filtrar">
 </mat-form-field>
 
@@ -8,8 +10,9 @@
   <ng-container
     *ngFor="let disCol of extrasTabela.titulos; let colIndex = index"
     matColumnDef="{{disCol}}">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>{{disCol}}</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ formatNumber(element.data[colIndex]) }}</mat-cell>
+    <mat-header-cell
+      *matHeaderCellDef mat-sort-header>{{disCol}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ formatNumber(element.data[disCol]) }}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="extrasTabela.titulos"></mat-header-row>
@@ -17,6 +20,7 @@
 </mat-table>
 
 <mat-paginator
+  *ngIf="!simples"
   #paginator
   [pageSize]="10"
   [pageSizeOptions]="[5, 10, 20, 50]">

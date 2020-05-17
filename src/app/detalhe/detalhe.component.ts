@@ -18,7 +18,7 @@ export class DetalheComponent implements OnInit, AfterViewInit {
   error = null;
 
   @ViewChild('toggleFiltroButton') toggleFiltroButton: ElementRef;
-  showFiltro = true;
+  showFiltro = false;
   texto = 'Esconder';
 
   ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -44,12 +44,10 @@ export class DetalheComponent implements OnInit, AfterViewInit {
       slugModelo: null,
     };
     this.getDadosData();
-    console.log(this.estado);
   }
 
   OnDataChanged = (data) => {
     this.estado = data;
-    console.log(this.estado);
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
     this.getDadosData();
@@ -68,6 +66,7 @@ export class DetalheComponent implements OnInit, AfterViewInit {
       .subscribe(
         (data: any) => {
           this.dados = data[0];
+          console.log(this.dados);
           },
         error => {
           this.error = error.message;

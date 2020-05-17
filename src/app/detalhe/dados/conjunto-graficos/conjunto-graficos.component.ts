@@ -28,25 +28,26 @@ export class ConjuntoGraficosComponent implements OnInit, OnChanges {
   }
 
   transformData = () => {
+    console.log('dasdas');
     this.dadosGraficos = [];
     this.labels = [];
     this.titulos = [];
     this.legendaYAxis = [];
     this.dadosF = [];
 
-    this.dadosGraficos = new Array(this.dadosAgrupamento[0].data.length);
+    this.dadosGraficos = new Array(this.dadosAgrupamento[0].chart.length);
     for (let i = 0; i < this.dadosGraficos.length; i++) {
       this.dadosGraficos[i] = new Array(this.dadosAgrupamento.length);
     }
 
     this.dadosAgrupamento.forEach((tipo, i) => {
       this.labels.push(tipo.label);
-      tipo.data.forEach((n, j) => {
+      tipo.chart.forEach((n, j) => {
         this.dadosGraficos[j][i] = n;
       });
     });
 
-    this.titulos = this.extraAgrupamento.titulos;
+    this.titulos = this.extraAgrupamento.titulos.slice(1);
     this.legendaYAxis = this.extraAgrupamento.legendaYAxis;
 
     this.titulos.forEach((value, index) => {

@@ -1,4 +1,5 @@
 export interface Circuito {
+  slug: string;
   dia: string;
   circuito: {slug: string, zona: number, turno: number} | {modelo_seletivo_macro: {slug: string, zona: number, turno: number}};
   inicio_time: string;

@@ -8,7 +8,7 @@ import {GeoJSON} from '../interfaces/geo-json';
 export class DadosService {
 
   private ENDPOINTCIRCUITOS = 'https://cabi.pt/apiv1/circuitos/';
-  private ENDPOINTDADOS = 'https://cabi.pt/apiv1/resumo/';
+  private ENDPOINTDADOS = 'https://cabi.pt/apiv1/resumo2/';
   private ENDPOINTMODELOS = 'https://cabi.pt/apiv1/modelos/';
   private headers: HttpHeaders;
 

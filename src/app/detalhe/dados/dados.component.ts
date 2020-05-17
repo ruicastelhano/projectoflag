@@ -46,15 +46,13 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.estado);
-    // this.activeComparativo = 0;
-    // if (this.escolhaAgrupamento) {
-    //  this.escolhaAgrupamento.nativeElement.style.display = 'none';
-    // }
+     this.activeComparativo = 0;
+     if (this.escolhaAgrupamento) {
+      this.escolhaAgrupamento.nativeElement.style.display = 'none';
+     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.prepareDOM();

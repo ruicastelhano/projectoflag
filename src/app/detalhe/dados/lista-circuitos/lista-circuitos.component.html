@@ -25,13 +25,14 @@
     <input matInput type="text" (keyup)="doFIlter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
-  <mat-table [dataSource]="dataSource" matSort>
+  <mat-table class="table" [dataSource]="dataSource" matSort>
 
     <ng-container
       *ngFor="let column of columns"
       matColumnDef="{{column}}">
       <mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element[column] }}</mat-cell>
+      <mat-cell
+        *matCellDef="let element">{{ element[column] }}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="columns"></mat-header-row>

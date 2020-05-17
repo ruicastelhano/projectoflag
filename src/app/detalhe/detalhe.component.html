@@ -1,10 +1,15 @@
 
 <section class="container">
+  <h4 class="btn btn-sm btn-info col-1 toogle mt-1"
+      #toggleFiltroButton>
+    <span
+      *ngIf="!showFiltro"class="material-icons">filter_list</span>
+    <span
+      *ngIf="showFiltro"class="material-icons">keyboard_backspace</span>
+  </h4>
+</section>
 
-  <h4 class="btn-block btn-danger p-2 mt-2 mb-2"
-      #toggleFiltroButton
-  ><span>{{ texto }}</span> base de análise/comparação</h4>
-
+<section class="container">
   <app-filtro
     *ngIf="showFiltro && slugProduto"
     [slugProduto]="slugProduto"

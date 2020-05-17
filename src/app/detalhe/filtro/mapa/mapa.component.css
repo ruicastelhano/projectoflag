@@ -1,9 +1,5 @@
 
-.map-frame {
-  border: 2px solid black;
-  height: 100%
-}
 
 #map {
-  height: 450px;
+  height: 350px;
 }

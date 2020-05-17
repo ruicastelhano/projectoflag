@@ -1,4 +1,5 @@
 export interface DadoAgrupamento {
   label: string;
-  data: number[];
+  data: object;
+  chart: number[];
 }

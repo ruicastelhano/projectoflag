@@ -1,64 +1,66 @@
 <form>
-  <div class="form-group">
-    <label for="ano">Ano</label>
-    <select class="form-control" id="ano"
-        #anoElement
-        (change)="getEstado()"
-    >
-      <option>Todos (>=2018)</option>
-      <option
-        *ngFor="let ano of anos"
-      >{{ ano }}</option>
-    </select>
+  <div class="form-row">
+    <div class="form-group col-6">
+      <label for="ano">Ano</label>
+      <select class="form-control" id="ano"
+              #anoElement
+              (change)="getEstado()">
+        <option>Todos (>=2018)</option>
+        <option
+          *ngFor="let ano of anos"
+        >{{ ano }}</option>
+      </select>
+    </div>
+    <div class="form-group col-6">
+      <label for="mes">Mês</label>
+      <select class="form-control" id="mes"
+              #mesElement
+              (change)="getEstado()">
+        <option>Todos</option>
+        <option
+          *ngFor="let mes of meses"
+        >{{ mes }}</option>
+      </select>
+    </div>
+  </div>
 
-    <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+  <div class="form-row">
+    <div class="form-group col-6">
+      <label for="zona">Zona</label>
+      <select class="form-control" id="zona"
+              #zonaElement
+              (change)="getEstado()">
+        <option>Todas</option>
+        <option
+          *ngFor="let zona of zonas"
+        >{{ zona }}</option>
+      </select>
+    </div>
+    <div class="form-group col-6">
+      <label for="turno">Turno</label>
+      <select class="form-control" id="turno"
+              #turnoElement
+              (change)="getEstado()">
+        <option>Todos</option>
+        <option
+          *ngFor="let turno of turnos"
+        >{{ turno }}</option>
+      </select>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="mes">Mes</label>
-    <select class="form-control" id="mes"
-            #mesElement
-            (change)="getEstado()"
-    >
-      <option>Todos</option>
-      <option
-      *ngFor="let mes of meses"
-    >{{ mes }}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="zona">Zona</label>
-    <select class="form-control" id="zona"
-            #zonaElement
-            (change)="getEstado()"
-    >
-      <option>Todas</option>
-      <option
-        *ngFor="let zona of zonas"
-      >{{ zona }}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="turno">Turno</label>
-    <select class="form-control" id="turno"
-            #turnoElement
-            (change)="getEstado()"
-    >
-      <option>Todos</option>
-      <option
-        *ngFor="let turno of turnos"
-      >{{ turno }}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="modelo">Modelo</label>
-    <select class="form-control" id="modelo"
-            #modeloElement
-            (change)="getEstado()"
-    >
-      <option>Todos</option>
-      <option
-        *ngFor="let modelo of modelos"
-      >{{ modelo.slug }}</option>
-    </select>
+
+  <div class="form-row">
+    <div class="form-group col-12">
+      <label for="modelo">Modelo</label>
+      <select class="form-control" id="modelo"
+              #modeloElement
+              (change)="getEstado()">
+        <option>Todos</option>
+        <option
+          *ngFor="let modelo of modelos"
+        >{{ modelo.slug }}</option>
+      </select>
+    </div>
   </div>
 </form>
+
