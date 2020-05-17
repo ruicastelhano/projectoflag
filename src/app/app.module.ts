@@ -61,8 +61,8 @@ import {HttpCancelService} from './detalhe/services/http-cancel.service';
         LeafletModule,
     ],
   providers: [
-    HttpCancelService,
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+    // HttpCancelService,
+    // {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
     ],
   bootstrap: [AppComponent]
 })
