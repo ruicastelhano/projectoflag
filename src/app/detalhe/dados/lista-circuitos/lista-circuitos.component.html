@@ -38,12 +38,20 @@
     <mat-row *matRowDef="let row; columns: columns"></mat-row>
   </mat-table>
 
-
-  <mat-paginator
-    #paginator
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 20, 50]">
-  </mat-paginator>
+  <div class="page-buttons">
+    <button
+      *ngIf="previous"
+      class="btn prev"
+      (click)="fetchPrevious()">
+      Anterior
+    </button>
+    <button
+      *ngIf="next"
+      class="btn prev"
+      (click)="fetchNext()">
+      Próxima
+    </button>
+  </div>
 
 </div>
 

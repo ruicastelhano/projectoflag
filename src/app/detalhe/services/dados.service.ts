@@ -16,11 +16,11 @@ export class DadosService {
     this.headers = new HttpHeaders({});
   }
 
-  public getDataModelos(slug: string) {
+  public getDataModelos = (slug: string) => {
     return this.httpClient.get<GeoJSON>(`${this.ENDPOINTMODELOS}${slug}/`);
   }
 
-  public getDataDados(slugProduto: string, slugModelo: string, zona: number, turno: number, ano: number, mes: string) {
+  public getDataDados = (slugProduto: string, slugModelo: string, zona: number, turno: number, ano: number, mes: string) => {
     const params = {};
     params['slug_produto'] = slugProduto;
     const arrayAux = [[slugModelo, 'slug_modelo'], [zona, 'zona'], [turno, 'turno'], [ano, 'ano'], [mes, 'mes']];
@@ -35,7 +35,7 @@ export class DadosService {
     return this.httpClient.get(`${this.ENDPOINTDADOS}`, {params});
   }
 
-  public getDataCircutos(slugProduto: string, slugModelo: string, zona: number, turno: number, ano: number, mes: any) {
+  public getDataCircutos = (slugProduto: string, slugModelo: string, zona: number, turno: number, ano: number, mes: any) => {
     const params = {};
     if (slugModelo) {
       params['circuito__slug'] = slugModelo;
@@ -62,6 +62,10 @@ export class DadosService {
     }
     console.log(params);
     return this.httpClient.get(`${this.ENDPOINTCIRCUITOS}${slugProduto}/`, {params});
+  }
+
+  public getDataCircutosNextPrevious = (url) => {
+    return this.httpClient.get(url);
   }
 
 }

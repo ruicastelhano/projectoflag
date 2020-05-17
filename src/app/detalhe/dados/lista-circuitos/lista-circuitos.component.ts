@@ -21,6 +21,9 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   error = null;
   ngUnsubscribe: Subject<void> = new Subject<void>();
 
+  next: string;
+  previous: string;
+
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private dadosService: DadosService) { }
@@ -57,10 +60,56 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
           this.dataSource.data = this.circuitos;
           this.dataSource.sort = this.sort;
           this.columns = Object.keys(this.circuitos[0]);
+
+          if (data.next) {
+            this.next = data.next;
+          }
+          if (data.previous) {
+            this.previous = data.previous;
+          }
+
         },
         error => {
           this.error = error.message;
         });
+  }
+
+  // TODO Unir getDataCircutosNextPrevious e getDadosCircuitos (DRY)
+
+  getDataCircutosNextPrevious = (url) => {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+    console.log(url);
+    this.circuitos = null;
+    this.dataSource.data = null;
+    this.dadosService.getDataCircutosNextPrevious(url)
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe((data: any) => {
+          this.circuitos = data.results;
+          console.log(data);
+          this.dataSource.data = this.circuitos;
+          this.dataSource.sort = this.sort;
+          this.columns = Object.keys(this.circuitos[0]);
+
+          if (data.next) {
+            this.next = data.next;
+          }
+          if (data.previous) {
+            this.previous = data.previous;
+          }
+
+        },
+        error => {
+          this.error = error.message;
+        });
+  }
+
+  fetchNext() {
+    this.getDataCircutosNextPrevious(this.next);
+  }
+
+  fetchPrevious() {
+    this.getDataCircutosNextPrevious(this.previous);
   }
 
   onHandleErro = () => {
