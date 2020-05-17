@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {GeoJSON} from '../interfaces/geo-json';
 
 @Injectable({
@@ -10,8 +10,11 @@ export class DadosService {
   private ENDPOINTCIRCUITOS = 'https://cabi.pt/apiv1/circuitos/';
   private ENDPOINTDADOS = 'https://cabi.pt/apiv1/resumo/';
   private ENDPOINTMODELOS = 'https://cabi.pt/apiv1/modelos/';
+  private headers: HttpHeaders;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.headers = new HttpHeaders({});
+  }
 
   public getDataModelos(slug: string) {
     return this.httpClient.get<GeoJSON>(`${this.ENDPOINTMODELOS}${slug}/`);

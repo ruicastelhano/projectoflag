@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,6 +25,8 @@ import { ListaCircuitosComponent } from './detalhe/dados/lista-circuitos/lista-c
 import {MaterialModule} from './material.module';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import {InterceptorService} from './detalhe/services/interceptor.service';
+import {HttpCancelService} from './detalhe/services/http-cancel.service';
 
 
 @NgModule({
@@ -58,7 +60,10 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
         MatPaginatorModule,
         LeafletModule,
     ],
-  providers: [],
+  providers: [
+    HttpCancelService,
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

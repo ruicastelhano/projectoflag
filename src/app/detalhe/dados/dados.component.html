@@ -108,11 +108,18 @@
     ></app-lista-circuitos>
   </div>
 
+  <div class="alert alert-danger p-5"
+       *ngIf="error">
+    <h2>Ocorreu um erro na pesquisa de dados!!!</h2>
+    <p>{{ error }}</p>
+    <button class="btn btn-danger" (click)="onHandleErro()">Tentar de novo</button>
+  </div>
+
   <section class="container">
     <div class="row justify-content-center">
       <div
         class="col text-center p-5"
-        *ngIf="!circuitos">
+        *ngIf="!circuitos && !error">
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
       </div>
     </div>

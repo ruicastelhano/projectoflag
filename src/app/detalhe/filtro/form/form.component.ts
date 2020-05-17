@@ -70,22 +70,24 @@ export class FormComponent implements OnInit, AfterViewInit {
       mesLocal = mes;
     }
 
-    this.estado.ano = anoLocal;
-    this.estado.mes = mesLocal;
-    this.estado.turno = turno;
-    this.estado.zona = zona;
-    this.estado.slugModelo = slugModelo;
-
     if (slugModelo) {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.modelos.length; i++){
         if (this.modelos[i].slug === slugModelo) {
           this.turnoElement.nativeElement.value = this.modelos[i].turno;
+          turno = this.modelos[i].turno;
           this.zonaElement.nativeElement.value = this.modelos[i].zona;
+          zona = this.modelos[i].zona;
           break;
         }
       }
     }
+
+    this.estado.ano = anoLocal;
+    this.estado.mes = mesLocal;
+    this.estado.turno = turno;
+    this.estado.zona = zona;
+    this.estado.slugModelo = slugModelo;
 
     this.dataChanged.emit(this.estado);
   }

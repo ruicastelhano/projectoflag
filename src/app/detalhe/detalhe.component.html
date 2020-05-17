@@ -1,6 +1,4 @@
 
-
-
 <section class="container">
 
   <h4 class="btn-block btn-danger p-2 mt-2 mb-2"
@@ -14,9 +12,16 @@
   ></app-filtro>
 </section>
 
+<div class="alert alert-danger p-5"
+  *ngIf="error">
+    <h2>Ocorreu um erro na pesquisa de dados!!!</h2>
+    <p>{{ error }}</p>
+    <button class="btn btn-danger" (click)="onHandleErro()">Tentar de novo</button>
+</div>
+
 <section class="container">
   <app-dados
-    *ngIf="dados"
+    *ngIf="dados && !error"
     [estado]="estado"
     [dados]="dados"
     [slugProduto]="slugProduto"
@@ -27,7 +32,7 @@
   <div class="row justify-content-center">
   <div
     class="col text-center p-5"
-    *ngIf="!dados">
+    *ngIf="!dados && !error">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
   </div>

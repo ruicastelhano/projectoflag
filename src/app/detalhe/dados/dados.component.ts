@@ -1,6 +1,4 @@
 import {
-  AfterContentChecked,
-  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -15,9 +13,10 @@ import {DadosGeral} from '../interfaces/dados-geral';
 import {DadoAgrupamento} from '../interfaces/dado-agrupamento';
 import {ExtraAgrupamento} from '../interfaces/extra-agrupamento';
 import {Circuito} from '../interfaces/circuito';
-import {MatTableDataSource} from '@angular/material/table';
 import {Estado} from '../interfaces/estado';
 import {DadosService} from '../services/dados.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dados',
@@ -36,6 +35,9 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
 
   circuitos: Circuito[];
 
+  error = null;
+  ngUnsubscribe: Subject<void> = new Subject<void>();
+
   @ViewChild('btnGlobal') btnGlobal: ElementRef;
   @ViewChild('btnModelos') btnModelos: ElementRef;
   @ViewChild('btnTurnos') btnTurnos: ElementRef;
@@ -53,10 +55,12 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
   constructor(private dadosService: DadosService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    this.activeComparativo = 0;
-    if (this.escolhaAgrupamento) {
-      this.escolhaAgrupamento.nativeElement.style.display = 'none';
-    }
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+    // this.activeComparativo = 0;
+    // if (this.escolhaAgrupamento) {
+    //  this.escolhaAgrupamento.nativeElement.style.display = 'none';
+    // }
     this.getDadosCircuitos();
   }
 
@@ -64,21 +68,33 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
   }
 
   ngAfterViewInit(): void {
+    this.getDadosCircuitos();
     this.prepareDOM();
   }
 
   getDadosCircuitos = () => {
     this.circuitos = null;
-    this.dadosService.getDataCircutos(
+    this.dadosService
+      .getDataCircutos(
       this.estado.slugProduto,
       this.estado.slugModelo,
       this.estado.zona,
       this.estado.turno,
       this.estado.ano,
-      this.estado.mes).subscribe((data: any) => {
-      this.circuitos = data;
-    });
-    console.log(this.circuitos);
+      this.estado.mes)
+      .pipe( takeUntil(this.ngUnsubscribe) )
+      .subscribe((data: any) => {
+        this.circuitos = data;
+        console.log(data);
+        },
+        error => {
+          this.error = error.message;
+        });
+  }
+
+  onHandleErro = () => {
+    this.error = null;
+    this.getDadosCircuitos();
   }
 
   prepareDOM = () => {

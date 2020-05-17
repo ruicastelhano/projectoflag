@@ -18,6 +18,7 @@ export class FiltroComponent implements OnInit {
   zonas: number[];
   turnos: number[];
   estado: Estado;
+  error = null;
 
   @Output() dataChanged = new EventEmitter<Estado>();
 
@@ -33,7 +34,10 @@ export class FiltroComponent implements OnInit {
         });
         this.zonas = Array.from(new Set(this.modelos.map(modelo => modelo.zona)));
         this.turnos = Array.from(new Set(this.modelos.map(modelo => modelo.turno)));
-      });
+      },
+        error => {
+          this.error = error.message;
+        });
   }
 
   OnDataChanged = (data) => {

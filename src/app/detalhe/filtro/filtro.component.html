@@ -1,6 +1,13 @@
 
+<div class="alert alert-danger p-5"
+     *ngIf="error">
+  <h2>Ocorreu um erro na pesquisa de dados!!!</h2>
+  <p>{{ error }}</p>
+</div>
+
 <div class="row mt-5">
-  <div class="col-xl-2 col-sm-4">
+  <div class="col-xl-2 col-sm-4"
+  *ngIf="!error">
     <app-form
       [slugProduto]="slugProduto"
       [modelos]="modelos"

@@ -50,7 +50,6 @@ export class MapaComponent implements OnInit, AfterViewInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.mapa) {
-      console.log(this.geojsonObject);
       this.layer = L.geoJSON(this.geojsonObject,
         {
           style: this.style,
