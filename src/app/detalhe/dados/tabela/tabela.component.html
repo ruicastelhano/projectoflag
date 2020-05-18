@@ -8,11 +8,11 @@
 <mat-table [dataSource]="dataSource" matSort>
 
   <ng-container
-    *ngFor="let disCol of extrasTabela.titulos; let colIndex = index"
-    matColumnDef="{{disCol}}">
+    *ngFor="let column of extrasTabela.titulos; let colIndex = index"
+    matColumnDef="{{column}}">
     <mat-header-cell
-      *matHeaderCellDef mat-sort-header>{{disCol}}</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ formatNumber(element.data[disCol]) }}</mat-cell>
+      *matHeaderCellDef mat-sort-header>{{column}}</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ formatNumber(element.data[column]) }}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="extrasTabela.titulos"></mat-header-row>
@@ -25,32 +25,3 @@
   [pageSize]="10"
   [pageSizeOptions]="[5, 10, 20, 50]">
 </mat-paginator>
-
-<!--
-
-<table class="table table-striped table-hover table-bordered">
-  <thead class="thead-dark">
-  <tr>
-    <th></th>
-    <ng-container
-      *ngIf="extrasTabela">
-      <th class="text-center align-middle text-uppercase"
-          *ngFor="let titulo of extrasTabela.titulos">{{ titulo }}</th>
-    </ng-container>
-  </tr>
-  </thead>
-  <tbody class="numeric-field">
-  <tr
-    *ngFor="let linha of dadosTabela">
-    <ng-template
-      [ngIf]="linha.data[0] !== 0">
-      <td class="text-center align-middle">{{ linha.label }}</td>
-      <td class="text-center align-middle"
-          *ngFor="let value of linha.data">{{ formatNumber(value) }}</td>
-    </ng-template>
-  </tr>
-  </tbody>
-</table>
--->
-
-

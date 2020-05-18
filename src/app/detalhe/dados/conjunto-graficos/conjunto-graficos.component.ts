@@ -28,7 +28,6 @@ export class ConjuntoGraficosComponent implements OnInit, OnChanges {
   }
 
   transformData = () => {
-    console.log('dasdas');
     this.dadosGraficos = [];
     this.labels = [];
     this.titulos = [];

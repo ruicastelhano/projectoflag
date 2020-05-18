@@ -23,10 +23,11 @@ import { ConjuntoGraficosComponent } from './detalhe/dados/conjunto-graficos/con
 import { ToggleDisplayDirective } from './detalhe/directives/toggle-display.directive';
 import { ListaCircuitosComponent } from './detalhe/dados/lista-circuitos/lista-circuitos.component';
 import {MaterialModule} from './material.module';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {InterceptorService} from './detalhe/services/interceptor.service';
 import {HttpCancelService} from './detalhe/services/http-cancel.service';
+import {getPaginatorIntl} from './detalhe/dados/tabela/pt-paginator-intl';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import {HttpCancelService} from './detalhe/services/http-cancel.service';
         LeafletModule,
     ],
   providers: [
+    { provide: MatPaginatorIntl, useValue: getPaginatorIntl() }
     // HttpCancelService,
     // {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
     ],

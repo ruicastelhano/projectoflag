@@ -14,28 +14,30 @@ import {MatPaginator} from '@angular/material/paginator';
 export class TabelaComponent implements OnInit, OnChanges, AfterViewInit{
   @Input() dadosTabela: DadoAgrupamento[];
   @Input() extrasTabela: ExtraAgrupamento;
-  dataSource = new MatTableDataSource<DadoAgrupamento>();
   @Input() simples: boolean;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  dataSource = new MatTableDataSource<DadoAgrupamento>();
+
   constructor() {}
 
   ngAfterViewInit() {
-    this.getData();
+    this.dataSource.data = this.dadosTabela;
+    this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
-    this.getData();
+    this.dataSource.data = this.dadosTabela;
   }
 
-  getData = () => {
-    this.dataSource.data = this.dadosTabela;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  sortingDataAccessor = (row, column) => {
+    return row.data[column];
   }
 
   doFIlter = (value: string) => {

@@ -38,8 +38,7 @@ export class GraficoComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     this.render();
