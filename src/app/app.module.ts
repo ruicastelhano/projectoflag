@@ -4,8 +4,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 import { IntroComponent } from './intro/intro/intro.component';
 import { FiltroComponent } from './detalhe/filtro/filtro.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,16 +18,17 @@ import { TabelaComponent } from './detalhe/dados/tabela/tabela.component';
 import { GraficoComponent } from './detalhe/dados/conjunto-graficos/grafico/grafico.component';
 import {ChartsModule} from 'ng2-charts';
 import {FormsModule} from '@angular/forms';
-import { BackgroundColorDirective } from './detalhe/directives/background-color.directive';
+import { BackgroundColorDirective } from './shared/directives/background-color.directive';
 import { ConjuntoGraficosComponent } from './detalhe/dados/conjunto-graficos/conjunto-graficos.component';
-import { ToggleDisplayDirective } from './detalhe/directives/toggle-display.directive';
+import { ToggleDisplayDirective } from './shared/directives/toggle-display.directive';
 import { ListaCircuitosComponent } from './detalhe/dados/lista-circuitos/lista-circuitos.component';
 import {MaterialModule} from './material.module';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
-import {InterceptorService} from './detalhe/services/interceptor.service';
-import {HttpCancelService} from './detalhe/services/http-cancel.service';
+import {InterceptorService} from './shared/services/interceptor.service';
+import {HttpCancelService} from './shared/services/http-cancel.service';
 import {getPaginatorIntl} from './detalhe/dados/tabela/pt-paginator-intl';
+import {SpinnerComponent} from './shared/components/spinner/spinner.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {getPaginatorIntl} from './detalhe/dados/tabela/pt-paginator-intl';
     BackgroundColorDirective,
     ConjuntoGraficosComponent,
     ToggleDisplayDirective,
-    ListaCircuitosComponent
+    ListaCircuitosComponent,
+    SpinnerComponent
   ],
     imports: [
         BrowserAnimationsModule,
@@ -62,7 +64,7 @@ import {getPaginatorIntl} from './detalhe/dados/tabela/pt-paginator-intl';
         LeafletModule,
     ],
   providers: [
-    { provide: MatPaginatorIntl, useValue: getPaginatorIntl() }
+    { provide: MatPaginatorIntl, useValue: getPaginatorIntl() },
     // HttpCancelService,
     // {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
     ],

@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {DadoAgrupamento} from '../../interfaces/dado-agrupamento';
-import {ExtraAgrupamento} from '../../interfaces/extra-agrupamento';
+import {DadoAgrupamento} from '../../../shared/interfaces/dado-agrupamento';
+import {ExtraAgrupamento} from '../../../shared/interfaces/extra-agrupamento';
 
 @Component({
   selector: 'app-conjunto-graficos',
@@ -10,7 +10,6 @@ import {ExtraAgrupamento} from '../../interfaces/extra-agrupamento';
 export class ConjuntoGraficosComponent implements OnInit, OnChanges {
   @Input() dadosAgrupamento: DadoAgrupamento[];
   @Input() extraAgrupamento: ExtraAgrupamento;
-
   dadosGraficos: number[][];
   labels: string[] = [];
   titulos: string[];
@@ -27,7 +26,7 @@ export class ConjuntoGraficosComponent implements OnInit, OnChanges {
     this.transformData();
   }
 
-  transformData = () => {
+  private transformData = (): void => {
     this.dadosGraficos = [];
     this.labels = [];
     this.titulos = [];

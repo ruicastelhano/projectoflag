@@ -9,8 +9,7 @@ import {Color, Label} from 'ng2-charts';
 })
 export class GraficoComponent implements OnInit, OnChanges {
   @Input() dados;
-
-  public barChartOptions: ChartOptions = {
+  barChartOptions: ChartOptions = {
     responsive: true,
     scales: {
       yAxes: [{
@@ -25,15 +24,13 @@ export class GraficoComponent implements OnInit, OnChanges {
       }]
     }
   };
-  public barChartLabels: Label[];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [];
-
-  public barChartData: ChartDataSets[];
-
-  public barChartColors: Color[] = [
-    { backgroundColor: '#e67e22' },
+  barChartLabels: Label[];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
+  barChartData: ChartDataSets[];
+  barChartColors: Color[] = [
+    { backgroundColor: '#641E16' },
   ];
 
   constructor() { }
@@ -44,7 +41,7 @@ export class GraficoComponent implements OnInit, OnChanges {
     this.render();
   }
 
-  render = () => {
+  private render = (): void => {
     this.barChartLabels = this.dados.labels;
     this.barChartData = [
       { data: this.dados.data, label: this.dados.titulo },

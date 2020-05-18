@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 import * as L from 'leaflet';
 import {LeafletLayerDirective} from '@asymmetrik/ngx-leaflet';
-import {GeoJSON} from '../../interfaces/geo-json';
+import {GeoJSONPolygon} from '../../../shared/interfaces/geo-j-s-o-n-polygon';
 
 @Component({
   selector: 'app-mapa',
@@ -9,17 +9,16 @@ import {GeoJSON} from '../../interfaces/geo-json';
   styleUrls: ['./mapa.component.css']
 })
 export class MapaComponent implements OnInit, AfterViewInit, OnChanges{
+  @Input() geojsonObject: GeoJSONPolygon;
   mapa;
-  @Input() geojsonObject: GeoJSON;
   layer: any;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  style = (feature) => {
-    const st = feature.properties.turno === 1 ?
+  style = (feature): object => {
+    return  feature.properties.turno === 1 ?
       {
         color: 'white',
         fillColor: 'tomato',
@@ -34,12 +33,10 @@ export class MapaComponent implements OnInit, AfterViewInit, OnChanges{
         opacity: 1,
         fillOpacity: 0.6,
       };
-    return st;
     }
 
-  onEachFeature = (feature, layer) => {
-    // layer.bindPopup(feature.properties.slug);
-    const label = L.marker(layer.getBounds().getCenter(), {
+  onEachFeature = (feature, layer): void => {
+    L.marker(layer.getBounds().getCenter(), {
       icon: L.divIcon({
         className: 'bg-light p-1',
         html: feature.properties.slug,
@@ -56,7 +53,6 @@ export class MapaComponent implements OnInit, AfterViewInit, OnChanges{
           onEachFeature: this.onEachFeature,
         });
       this.layer.addTo(this.mapa);
-
       this.mapa.fitBounds(this.layer.getBounds());
     }
   }
@@ -65,7 +61,7 @@ export class MapaComponent implements OnInit, AfterViewInit, OnChanges{
     this.initMapa();
   }
 
-  private initMapa(): void {
+  private initMapa = (): void => {
     this.mapa = L.map('map').setView([38.7, -9.35], 12);
 
     const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -79,7 +75,6 @@ export class MapaComponent implements OnInit, AfterViewInit, OnChanges{
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     }).addTo(this.mapa);
     googleHybrid.addTo(this.mapa);
-
   }
 
 }

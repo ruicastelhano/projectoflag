@@ -3,9 +3,9 @@
   <h4 class="btn btn-sm btn-info col-1 toogle mt-1"
       #toggleFiltroButton>
     <span
-      *ngIf="!showFiltro"class="material-icons">filter_list</span>
+      *ngIf="!showFiltro" class="material-icons">filter_list</span>
     <span
-      *ngIf="showFiltro"class="material-icons">keyboard_backspace</span>
+      *ngIf="showFiltro" class="material-icons">keyboard_backspace</span>
   </h4>
 </section>
 
@@ -33,12 +33,9 @@
   ></app-dados>
 </section>
 
-<section class="container">
-  <div class="row justify-content-center">
-  <div
-    class="col text-center p-5"
-    *ngIf="!dados && !error">
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  </div>
-  </div>
-</section>
+<app-spinner
+  *ngIf="!dados && !error">
+</app-spinner>
+
+
+

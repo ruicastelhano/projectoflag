@@ -1,61 +1,93 @@
 
-<div class="row text-center align-middle mb-2 mt-4">
-  <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
+<div class="row text-center align-middle mb-1 mt-2">
+
+  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           #btnGlobal
-          appBackgroundColor [slugProduto]="slugProduto" [index]="0" [activeComparativo]="activeComparativo"
+          appBackgroundColor
+          [slugProduto]="slugProduto"
+          [index]="0"
+          [activeComparativo]="activeComparativo"
   >Global</button>
-  <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
+
+  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['slug_modelo']"
           #btnModelos
-          appBackgroundColor [slugProduto]="slugProduto" [index]="1" [activeComparativo]="activeComparativo"
+          appBackgroundColor
+          [slugProduto]="slugProduto"
+          [index]="1"
+          [activeComparativo]="activeComparativo"
   >Circuitos</button>
-  <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
+
+  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['slug_modelo'] && !dados['turno']"
           #btnTurnos
-          appBackgroundColor [slugProduto]="slugProduto" [index]="2" [activeComparativo]="activeComparativo"
+          appBackgroundColor
+          [slugProduto]="slugProduto"
+          [index]="2"
+          [activeComparativo]="activeComparativo"
   >Turnos</button>
-  <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
+
+  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['slug_modelo'] && !dados['zona']"
           #btnZonas
-          appBackgroundColor [slugProduto]="slugProduto" [index]="3" [activeComparativo]="activeComparativo"
+          appBackgroundColor
+          [slugProduto]="slugProduto"
+          [index]="3"
+          [activeComparativo]="activeComparativo"
   >Zonas</button>
-  <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
+
+  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['ano']"
           #btnAnual
-          appBackgroundColor [slugProduto]="slugProduto" [index]="4" [activeComparativo]="activeComparativo"
+          appBackgroundColor
+          [slugProduto]="slugProduto"
+          [index]="4"
+          [activeComparativo]="activeComparativo"
   >Anual</button>
-  <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
+
+  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           *ngIf="!dados['mes']"
           #btnMensal
-          appBackgroundColor [slugProduto]="slugProduto" [index]="5" [activeComparativo]="activeComparativo"
+          appBackgroundColor
+          [slugProduto]="slugProduto"
+          [index]="5"
+          [activeComparativo]="activeComparativo"
   >Mensal</button>
-  <button class="h4-btn mr-2 ml-2 p-3 btn-sm text-center btn btn-block text-uppercase col"
+
+  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           #btnCircuitos
-          appBackgroundColor [slugProduto]="slugProduto" [index]="6" [activeComparativo]="activeComparativo"
+          appBackgroundColor
+          [slugProduto]="slugProduto"
+          [index]="6"
+          [activeComparativo]="activeComparativo"
   >Listagem</button>
+
 </div>
 
 <div class="row text-center align-middle mb-2 mt-4 w-100"
-  #escolhaAgrupamento
->
+  #escolhaAgrupamento>
+
   <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           #btnSum
           [ngClass]="{'btn-dark': activeAgrupamento === 1, 'btn-outline-dark': activeAgrupamento !== 1}"
   >Acumulado</button>
+
   <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           #btnAvg
           [ngClass]="{'btn-dark': activeAgrupamento === 2, 'btn-outline-dark': activeAgrupamento !== 2}"
   >Mèdias</button>
+
   <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
           #btnRat
           [ngClass]="{'btn-dark': activeAgrupamento === 3, 'btn-outline-dark': activeAgrupamento !== 3}"
   >Rácios</button>
+
 </div>
 
 <div
-     *ngIf="activeComparativo===0">
+  *ngIf="activeComparativo===0">
 
-  <div class="table-responsive mt-2">
+  <div class="table-responsive mt-4">
     <app-tabela
       [dadosTabela]="dados['global_data'].sum"
       [extrasTabela]="dados.extras.sum"

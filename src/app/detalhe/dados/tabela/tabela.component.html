@@ -1,9 +1,9 @@
 
-
 <mat-form-field
   *ngIf="!simples">
-  <input matInput type="text" (keyup)="doFIlter($event.target.value)" placeholder="Filtrar">
+  <input matInput type="text" (keyup)="filter($event.target.value)" placeholder="Filtrar">
 </mat-form-field>
+
 
 <mat-table [dataSource]="dataSource" matSort>
 

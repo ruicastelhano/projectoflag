@@ -4,12 +4,6 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-
-.numeric-field {
-  font-family: monospace;
-  white-space: nowrap;
-}
-
 mat-header-cell, mat-cell {
   justify-content: center;
 }
@@ -28,4 +22,36 @@ mat-header-cell, mat-cell {
 .mat-header-cell {
   background: #171a1d;
   color: white;
+}
+
+.mat-table {
+  overflow-x: scroll;
+}
+
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  line-break: unset;
+  width: 100%;
+  overflow: hidden;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 90%;
+}
+
+.mat-cell {
+  font-family: monospace;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+
+.mat-header-cell {
+  padding: 10px 10px;
+}
+
+.mat-row,
+.mat-header-row {
+  display: table-row;
+  min-height: 25px;
 }

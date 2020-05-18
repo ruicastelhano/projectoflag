@@ -7,22 +7,30 @@
   <button class="btn btn-danger" (click)="onHandleErro()">Tentar de novo</button>
 </div>
 
+<app-spinner
+  *ngIf="!circuitos && !error">
+</app-spinner>
 
-<section class="container">
-  <div class="row justify-content-center">
-    <div
-      class="col text-center p-5"
-      *ngIf="!circuitos && !error">
-      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-    </div>
-  </div>
-</section>
-
-<div
+<div class="table"
   *ngIf="circuitos">
 
+  <div class="page-buttons">
+    <button
+      *ngIf="previous"
+      class="btn prev"
+      (click)="fetchPrevious()">
+      Anterior
+    </button>
+    <button
+      *ngIf="next"
+      class="btn prev"
+      (click)="fetchNext()">
+      Próxima
+    </button>
+  </div>
+
   <mat-form-field>
-    <input matInput type="text" (keyup)="doFIlter($event.target.value)" placeholder="Filtrar">
+    <input matInput type="text" (keyup)="filter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
   <mat-table class="table" [dataSource]="dataSource" matSort>

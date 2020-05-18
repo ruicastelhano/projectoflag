@@ -5,9 +5,4 @@
   margin: 10px 5px;
 }
 
-.chart:hover {
-  transform: scale(1) translate(0%, 0%);
-  background: white;
-  z-index: 100;
-}
 

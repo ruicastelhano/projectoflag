@@ -12,15 +12,15 @@ export class InterceptorService implements HttpInterceptor {
   constructor(router: Router,
               private httpCancelService: HttpCancelService) {
     router.events.subscribe(event => {
-      // An event triggered at the end of the activation part of the Resolve phase of routing.
       if (event instanceof ActivationEnd) {
-        // Cancel pending calls
         this.httpCancelService.cancelPendingRequests();
       }
     });
   }
 
   intercept<T>(req: HttpRequest<T>, next: HttpHandler): Observable<HttpEvent<T>> {
-    return next.handle(req).pipe(takeUntil(this.httpCancelService.onCancelPendingRequests()));
+    return next
+      .handle(req)
+      .pipe(takeUntil(this.httpCancelService.onCancelPendingRequests()));
   }
 }

@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {DadoAgrupamento} from '../../interfaces/dado-agrupamento';
-import {Extra} from '../../interfaces/extra';
-import {ExtraAgrupamento} from '../../interfaces/extra-agrupamento';
+import {DadoAgrupamento} from '../../../shared/interfaces/dado-agrupamento';
+import {Extra} from '../../../shared/interfaces/extra';
+import {ExtraAgrupamento} from '../../../shared/interfaces/extra-agrupamento';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -15,10 +15,8 @@ export class TabelaComponent implements OnInit, OnChanges, AfterViewInit{
   @Input() dadosTabela: DadoAgrupamento[];
   @Input() extrasTabela: ExtraAgrupamento;
   @Input() simples: boolean;
-
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   dataSource = new MatTableDataSource<DadoAgrupamento>();
 
   constructor() {}
@@ -32,19 +30,19 @@ export class TabelaComponent implements OnInit, OnChanges, AfterViewInit{
 
   ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void  {
     this.dataSource.data = this.dadosTabela;
   }
 
-  sortingDataAccessor = (row, column) => {
+  private sortingDataAccessor = (row, column): any => {
     return row.data[column];
   }
 
-  doFIlter = (value: string) => {
+  filter = (value: string): void => {
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
-  formatNumber = (num) => {
+  formatNumber = (num): any => {
     if (num === 0){
       return ' ';
     }

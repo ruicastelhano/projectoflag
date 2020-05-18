@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {Circuito} from '../../interfaces/circuito';
+import {Circuito} from '../../../shared/interfaces/circuito';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import {Estado} from '../../interfaces/estado';
+import {Estado} from '../../../shared/interfaces/estado';
 import {Subject} from 'rxjs';
-import {DadosService} from '../../services/dados.service';
+import {DadosService} from '../../../shared/services/dados.service';
 import {takeUntil} from 'rxjs/operators';
 import {MatPaginator} from '@angular/material/paginator';
 
@@ -24,14 +24,13 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   ngUnsubscribe: Subject<void> = new Subject<void>();
   next: string;
   previous: string;
-
   pageSize = 20;
   resultsLength = 0;
 
   constructor(private dadosService: DadosService) { }
 
   ngAfterViewInit() {
-    this.getDadosCircuitos();
+    this.getDadosCircuitos(null);
   }
 
   ngOnInit(): void {}
@@ -39,20 +38,14 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   ngOnChanges(changes: SimpleChanges) {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-    this.getDadosCircuitos();
+    this.getDadosCircuitos(null);
   }
 
-  getDadosCircuitos = () => {
+  private getDadosCircuitos = (url: string): void  => {
     this.circuitos = null;
     this.dataSource.data = null;
     this.dadosService
-      .getDataCircutos(
-        this.estado.slugProduto,
-        this.estado.slugModelo,
-        this.estado.zona,
-        this.estado.turno,
-        this.estado.ano,
-        this.estado.mes)
+      .getDataCircutos(this.estado, url)
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe((data: any) => {
           data.results.forEach(row => {
@@ -62,71 +55,40 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
           this.dataSource.data = this.circuitos;
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-          this.resultsLength = data.count;
-          this.columns = Object.keys(this.circuitos[0]);
-          if (data.next) {
-            this.next = data.next;
-          }
-          if (data.previous) {
-            this.previous = data.previous;
-          }
-
-        },
-        error => {
-          this.error = error.message;
-        });
-  }
-
-  // TODO Unir getDataCircutosNextPrevious e getDadosCircuitos (DRY)
-
-  getDataCircutosNextPrevious = (url) => {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-    this.circuitos = null;
-    this.dataSource.data = null;
-    this.dadosService.getDataCircutosNextPrevious(url)
-      .pipe( takeUntil(this.ngUnsubscribe) )
-      .subscribe((data: any) => {
-          data.results.forEach(row => {
-            delete row.circuito;
-          });
           this.circuitos = data.results;
-          this.dataSource.data = this.circuitos;
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-          this.columns = Object.keys(this.circuitos[0]);
           this.resultsLength = data.count;
+          this.columns = Object.keys(this.circuitos[0]);
           if (data.next) {
             this.next = data.next;
           }
           if (data.previous) {
             this.previous = data.previous;
           }
-
         },
         error => {
           this.error = error.message;
-        });
+        }
+      );
   }
 
-  fetchNext() {
-    this.getDataCircutosNextPrevious(this.next);
+  fetchNext(): void  {
+    this.getDadosCircuitos(this.next);
   }
 
-  fetchPrevious() {
-    this.getDataCircutosNextPrevious(this.previous);
+  fetchPrevious(): void {
+    this.getDadosCircuitos(this.previous);
   }
 
-  onHandleErro = () => {
+  onHandleErro = (): void => {
     this.error = null;
-    this.getDadosCircuitos();
+    this.getDadosCircuitos(null);
   }
 
-  doFIlter = (value: string) => {
+  filter = (value: string): void => {
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
-  range = () => {
+  range = (): number[] => {
     const items: number[] = [];
     const limit = this.resultsLength / this.pageSize;
     for (let i = 1; i <= limit; i++){

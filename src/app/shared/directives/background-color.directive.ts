@@ -48,7 +48,6 @@ export class BackgroundColorDirective implements OnInit, OnChanges {
       }
     }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
 

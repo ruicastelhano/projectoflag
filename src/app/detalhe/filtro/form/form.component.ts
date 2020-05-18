@@ -1,10 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Modelo} from '../../interfaces/modelo';
-import {DadosAPIService} from '../../services/dados-api.service';
-import {Dado} from '../../interfaces/dado';
-import {CircuitosAPIService} from '../../services/circuitos-api.service';
-import {Circuito} from '../../interfaces/circuito';
-import {Estado} from '../../interfaces/estado';
+import {Modelo} from '../../../shared/interfaces/modelo';
+import {Estado} from '../../../shared/interfaces/estado';
 
 @Component({
   selector: 'app-form',
@@ -13,20 +9,18 @@ import {Estado} from '../../interfaces/estado';
 })
 export class FormComponent implements OnInit, AfterViewInit {
   @Input() slugProduto: string;
-  anos: number[];
-  meses: string[];
   @Input() zonas: number[] = [];
   @Input() turnos: number[] = [];
   @Input() modelos: Modelo[] = [];
-  estado: Estado;
-
+  @Output() dataChanged = new EventEmitter<Estado>();
   @ViewChild('anoElement') anoElement: ElementRef;
   @ViewChild('mesElement') mesElement: ElementRef;
   @ViewChild('zonaElement') zonaElement: ElementRef;
   @ViewChild('turnoElement') turnoElement: ElementRef;
   @ViewChild('modeloElement') modeloElement: ElementRef;
-
-  @Output() dataChanged = new EventEmitter<Estado>();
+  anos: number[];
+  meses: string[];
+  estado: Estado;
 
   constructor() {
   }
@@ -35,7 +29,7 @@ export class FormComponent implements OnInit, AfterViewInit {
     this.getEstado();
   }
 
-  getEstado(){
+  getEstado = (): void => {
     let slugModelo = null;
     let zona = null;
     let turno = null;
@@ -88,7 +82,6 @@ export class FormComponent implements OnInit, AfterViewInit {
     this.estado.turno = turno;
     this.estado.zona = zona;
     this.estado.slugModelo = slugModelo;
-
     this.dataChanged.emit(this.estado);
   }
 
@@ -118,6 +111,5 @@ export class FormComponent implements OnInit, AfterViewInit {
       ano--;
     }
   }
-
 
 }

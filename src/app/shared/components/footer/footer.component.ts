@@ -8,11 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
   ano: number;
 
-  constructor() {
-    this.ano = new Date().getFullYear();
-  }
+  constructor() {}
 
   ngOnInit(): void {
+    this.ano = new Date().getFullYear();
   }
 
 }

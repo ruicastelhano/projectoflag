@@ -8,11 +8,11 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {Dado} from '../interfaces/dado';
-import {DadosGeral} from '../interfaces/dados-geral';
-import {DadoAgrupamento} from '../interfaces/dado-agrupamento';
-import {ExtraAgrupamento} from '../interfaces/extra-agrupamento';
-import {Estado} from '../interfaces/estado';
+import {Dado} from '../../shared/interfaces/dado';
+import {DadosGeral} from '../../shared/interfaces/dados-geral';
+import {DadoAgrupamento} from '../../shared/interfaces/dado-agrupamento';
+import {ExtraAgrupamento} from '../../shared/interfaces/extra-agrupamento';
+import {Estado} from '../../shared/interfaces/estado';
 
 @Component({
   selector: 'app-dados',
@@ -20,28 +20,24 @@ import {Estado} from '../interfaces/estado';
   styleUrls: ['./dados.component.css']
 })
 export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
-  @Input() slugProduto: string; // Para retirar
+  @Input() slugProduto: string;
   @Input() estado: Estado;
-  @Input() dados: DadosGeral;
-  daodosComparativo: Dado;
-  dadosAgrupamento: DadoAgrupamento[];
-  extraAgrupamento: ExtraAgrupamento;
-  activeComparativo = 0;
-  activeAgrupamento: number;
-
-  @ViewChild('btnGlobal') btnGlobal: ElementRef;
+  @Input() dados: DadosGeral;@ViewChild('btnGlobal') btnGlobal: ElementRef;
   @ViewChild('btnModelos') btnModelos: ElementRef;
   @ViewChild('btnTurnos') btnTurnos: ElementRef;
   @ViewChild('btnZonas') btnZonas: ElementRef;
   @ViewChild('btnAnual') btnAnual: ElementRef;
   @ViewChild('btnMensal') btnMensal: ElementRef;
   @ViewChild('btnCircuitos') btnCircuitos: ElementRef;
-
   @ViewChild('btnSum') btnSum: ElementRef;
   @ViewChild('btnAvg') btnAvg: ElementRef;
   @ViewChild('btnRat') btnRat: ElementRef;
-
   @ViewChild('escolhaAgrupamento') escolhaAgrupamento: ElementRef;
+  daodosComparativo: Dado;
+  dadosAgrupamento: DadoAgrupamento[];
+  extraAgrupamento: ExtraAgrupamento;
+  activeComparativo = 0;
+  activeAgrupamento: number;
 
   constructor() {}
 
@@ -58,7 +54,7 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
     this.prepareDOM();
   }
 
-  prepareDOM = () => {
+  private prepareDOM = (): void => {
     this.escolhaAgrupamento.nativeElement.style.display = 'none';
 
     this.btnGlobal.nativeElement.addEventListener('click', () => {
@@ -82,14 +78,14 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
     this.btnRat.nativeElement.addEventListener('click', this.addBtnAgrupamentoListener.bind(this, 'rat', 3));
     }
 
-  addBtnComparativoListener = (tipo, int) => {
+  private addBtnComparativoListener = (tipo, int): void => {
     this.daodosComparativo = this.dados[tipo];
     this.activeAgrupamento = null;
     this.activeComparativo = int;
     this.escolhaAgrupamento.nativeElement.style.display = 'inline-flex';
   }
 
-  addBtnAgrupamentoListener = (tipo, int) => {
+  private addBtnAgrupamentoListener = (tipo, int): void => {
     this.dadosAgrupamento = this.daodosComparativo[tipo];
     this.extraAgrupamento = this.dados.extras[tipo];
     this.activeAgrupamento = int;

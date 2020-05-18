@@ -8,12 +8,11 @@ export class HttpCancelService {
 
   constructor() { }
 
-  // Cancel Pending HTTP calls
-  public cancelPendingRequests() {
+  cancelPendingRequests() {
     this.pendingHTTPRequests$.next();
   }
 
-  public onCancelPendingRequests() {
+  onCancelPendingRequests() {
     return this.pendingHTTPRequests$.asObservable();
   }
 

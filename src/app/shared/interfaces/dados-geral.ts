@@ -2,17 +2,17 @@ import {Dado} from './dado';
 import {Extra} from './extra';
 
 export interface DadosGeral {
-  ano: number;
+  ano?: number;
   anos_data: Dado;
   extras: Extra;
   global_data: Dado;
-  mes: number;
+  mes?: number;
   meses_data: Dado;
   modelos_data: Dado;
-  slug_modelo: string;
-  slug_produto: string;
-  turno: number;
+  slug_modelo?: string;
+  slug_produto?: string;
+  turno?: number;
   turno_data: Dado;
-  zona: number;
+  zona?: number;
   zonas_data: Dado;
 }

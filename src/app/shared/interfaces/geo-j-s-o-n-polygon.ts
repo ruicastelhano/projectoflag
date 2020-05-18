@@ -1,4 +1,4 @@
-export interface GeoJSON {
+export interface GeoJSONPolygon {
   type: 'FeatureCollection';
   features: {
     properties: object,
