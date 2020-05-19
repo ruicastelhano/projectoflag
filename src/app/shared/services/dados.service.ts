@@ -36,11 +36,18 @@ export class DadosService {
     return this.httpClient.get(`${this.ENDPOINTDADOS}`, {params});
   }
 
-  public getDataCircutos = (estado: Estado, url: string) => {
+  public getDataCircutos = (estado: Estado, url: string, filterString: string) => {
+    const params = {};
+
+    if (filterString) {
+      params['search'] = filterString;
+      return this.httpClient.get(`${this.ENDPOINTCIRCUITOS}${estado.slugProduto}/`, {params});
+    }
+
     if (url){
       return this.httpClient.get(url);
     }
-    const params = {};
+
     if (estado.slugModelo) {
       params['circuito__slug'] = estado.slugModelo;
     }

@@ -8,59 +8,65 @@
 </div>
 
 <app-spinner
-  *ngIf="!circuitos && !error">
+  *ngIf="(!circuitos && !error)">
 </app-spinner>
 
-<div class="table"
-  *ngIf="circuitos">
+<div class="table">
 
-  <div class="page-buttons">
-    <button
-      *ngIf="previous"
-      class="btn prev"
-      (click)="fetchPrevious()">
-      Anterior
-    </button>
-    <button
-      *ngIf="next"
-      class="btn prev"
-      (click)="fetchNext()">
-      Próxima
-    </button>
+  <div class="row">
+
+    <mat-form-field
+      class="col-4">
+      <input matInput type="text" (keyup)="filter($event.target.value)" placeholder="Filtrar" value="{{ filterString }}">
+    </mat-form-field>
+
+    <div class="paginacao col-8 pt-3"
+
+         *ngIf="circuitos">
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item"><button
+            class="page-link"
+            *ngIf="previous"
+            (click)="fetchPrevious()">
+            &laquo;
+          </button></li>
+          <li class="page-item"
+              class="page align-middle p-2">
+            Página {{ currentPage }} de {{ paginas }}</li>
+          <li class="page-item"><button
+            class="page-link"
+            *ngIf="next"
+            (click)="fetchNext()">
+            &raquo;
+          </button></li>
+        </ul>
+      </nav>
+    </div>
+
+
+    <mat-table class="table" [dataSource]="dataSource" matSort>
+      <ng-container
+        *ngFor="let column of columns"
+        matColumnDef="{{column}}"
+      >
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >{{column}}</mat-header-cell>
+        <mat-cell
+          *matCellDef="let element"
+        >{{ element[column] }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="columns"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: columns"
+      ></mat-row>
+    </mat-table>
+
   </div>
-
-  <mat-form-field>
-    <input matInput type="text" (keyup)="filter($event.target.value)" placeholder="Filtrar">
-  </mat-form-field>
-
-  <mat-table class="table" [dataSource]="dataSource" matSort>
-
-    <ng-container
-      *ngFor="let column of columns"
-      matColumnDef="{{column}}">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</mat-header-cell>
-      <mat-cell
-        *matCellDef="let element">{{ element[column] }}</mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: columns"></mat-row>
-  </mat-table>
-
-  <div class="page-buttons">
-    <button
-      *ngIf="previous"
-      class="btn prev"
-      (click)="fetchPrevious()">
-      Anterior
-    </button>
-    <button
-      *ngIf="next"
-      class="btn prev"
-      (click)="fetchNext()">
-      Próxima
-    </button>
-  </div>
-
 </div>
-

@@ -14,6 +14,9 @@ import {MatPaginator} from '@angular/material/paginator';
   styleUrls: ['./lista-circuitos.component.css']
 })
 export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges{
+
+  // TODO server side sorting
+
   @Input() estado: Estado;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,7 +28,10 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   next: string;
   previous: string;
   pageSize = 20;
-  resultsLength = 0;
+  resultadosSize = 0;
+  filterString: string;
+  currentPage = 1;
+  paginas: number;
 
   constructor(private dadosService: DadosService) { }
 
@@ -42,10 +48,8 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private getDadosCircuitos = (url: string): void  => {
-    this.circuitos = null;
-    this.dataSource.data = null;
     this.dadosService
-      .getDataCircutos(this.estado, url)
+      .getDataCircutos(this.estado, url, this.filterString)
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe((data: any) => {
           data.results.forEach(row => {
@@ -55,9 +59,11 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
           this.dataSource.data = this.circuitos;
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-          this.circuitos = data.results;
-          this.resultsLength = data.count;
-          this.columns = Object.keys(this.circuitos[0]);
+          this.resultadosSize = data.count;
+          this.paginas = Math.ceil(this.resultadosSize / this.pageSize);
+          if (!this.columns) {
+            this.columns = Object.keys(this.circuitos[0]);
+          }
           if (data.next) {
             this.next = data.next;
           }
@@ -72,10 +78,14 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   fetchNext(): void  {
+    this.filterString = null;
+    this.currentPage++;
     this.getDadosCircuitos(this.next);
   }
 
   fetchPrevious(): void {
+    this.filterString = null;
+    this.currentPage--;
     this.getDadosCircuitos(this.previous);
   }
 
@@ -85,12 +95,14 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   filter = (value: string): void => {
-    this.dataSource.filter = value.trim().toLowerCase();
+    this.filterString = value;
+    this.currentPage = 1;
+    this.getDadosCircuitos(null);
   }
 
   range = (): number[] => {
     const items: number[] = [];
-    const limit = this.resultsLength / this.pageSize;
+    const limit = this.resultadosSize / this.pageSize;
     for (let i = 1; i <= limit; i++){
       items.push(i);
     }
