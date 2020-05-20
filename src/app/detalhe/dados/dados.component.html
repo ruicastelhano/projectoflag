@@ -87,7 +87,7 @@
 <div
   *ngIf="activeComparativo===0">
 
-  <div class="table-responsive mt-4">
+  <div class="mt-4">
     <app-tabela
       [dadosTabela]="dados['global_data'].sum"
       [extrasTabela]="dados.extras.sum"
@@ -95,7 +95,7 @@
     ></app-tabela>
   </div>
 
-  <div class="table-responsive mt-2">
+  <div class="mt-3">
     <app-tabela
       [dadosTabela]="dados['global_data'].avg"
       [extrasTabela]="dados.extras.avg"
@@ -103,7 +103,7 @@
     ></app-tabela>
   </div>
 
-  <div class="table-responsive mt-2">
+  <div class="mt-3">
     <app-tabela
       [dadosTabela]="dados['global_data'].rat"
       [extrasTabela]="dados.extras.rat"
@@ -116,14 +116,12 @@
 <div
   *ngIf="activeComparativo!==0 && activeComparativo!==6">
 
-  <div class="table-responsive">
-    <app-tabela
-      *ngIf="activeAgrupamento"
-      [dadosTabela]="dadosAgrupamento"
-      [extrasTabela]="extraAgrupamento"
-      [simples]="false"
-    ></app-tabela>
-  </div>
+  <app-tabela
+    *ngIf="activeAgrupamento"
+    [dadosTabela]="dadosAgrupamento"
+    [extrasTabela]="extraAgrupamento"
+    [simples]="false"
+  ></app-tabela>
 
   <div class="row justify-content-center">
     <app-conjunto-graficos
@@ -138,10 +136,8 @@
 <div
   *ngIf="activeComparativo==6">
 
-  <div class="table-responsive">
-    <app-lista-circuitos
-      [estado]="estado"
-    ></app-lista-circuitos>
-  </div>
+  <app-lista-circuitos
+    [estado]="estado"
+  ></app-lista-circuitos>
 
 </div>

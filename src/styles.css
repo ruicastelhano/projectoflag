@@ -12,14 +12,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color:#fafafa;
 }
 
-.mat-cell:first-child{
-}
-
-.mat-header-cell {
-  background: #171a1d;
-  color: white;
-}
-
 .mat-table {
   overflow-x: scroll;
 }
@@ -33,17 +25,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   overflow: hidden;
   vertical-align: middle;
   text-align: center;
-  font-size: 90%;
 }
 
 .mat-cell {
   font-family: monospace;
   white-space: nowrap;
   padding: 0 10px;
+  font-size: 90%;
 }
 
 .mat-header-cell {
   padding: 10px 10px;
+  background: #171a1d;
+  color: white;
+  font-size: 80%;
 }
 
 .mat-row,

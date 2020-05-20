@@ -29,6 +29,7 @@ import {InterceptorService} from './shared/services/interceptor.service';
 import {HttpCancelService} from './shared/services/http-cancel.service';
 import {getPaginatorIntl} from './detalhe/dados/tabela/pt-paginator-intl';
 import {SpinnerComponent} from './shared/components/spinner/spinner.component';
+import { FormatNumbersPipe } from './shared/pipes/format-numbers.pipe';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {SpinnerComponent} from './shared/components/spinner/spinner.component';
     ConjuntoGraficosComponent,
     ToggleDisplayDirective,
     ListaCircuitosComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    FormatNumbersPipe
   ],
     imports: [
         BrowserAnimationsModule,

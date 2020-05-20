@@ -36,8 +36,9 @@ export class DadosService {
     return this.httpClient.get(`${this.ENDPOINTDADOS}`, {params});
   }
 
-  public getDataCircutos = (estado: Estado, url: string, filterString: string) => {
+  public getDataCircutos = (estado: Estado, url: string, filterString: string, ordering: string) => {
     const params = {};
+    params['ordering'] = ordering;
 
     if (filterString) {
       params['search'] = filterString;

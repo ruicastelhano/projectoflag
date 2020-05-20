@@ -14,9 +14,6 @@ import {MatPaginator} from '@angular/material/paginator';
   styleUrls: ['./lista-circuitos.component.css']
 })
 export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges{
-
-  // TODO server side sorting
-
   @Input() estado: Estado;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,8 +29,11 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
   filterString: string;
   currentPage = 1;
   paginas: number;
+  orderingFilter: string;
 
-  constructor(private dadosService: DadosService) { }
+  constructor(private dadosService: DadosService) {
+    this.orderingFilter = '-dia';
+  }
 
   ngAfterViewInit() {
     this.getDadosCircuitos(null);
@@ -49,7 +49,7 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
 
   private getDadosCircuitos = (url: string): void  => {
     this.dadosService
-      .getDataCircutos(this.estado, url, this.filterString)
+      .getDataCircutos(this.estado, url, this.filterString, this.orderingFilter)
       .pipe( takeUntil(this.ngUnsubscribe) )
       .subscribe((data: any) => {
           data.results.forEach(row => {
@@ -100,13 +100,14 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnChanges
     this.getDadosCircuitos(null);
   }
 
-  range = (): number[] => {
-    const items: number[] = [];
-    const limit = this.resultadosSize / this.pageSize;
-    for (let i = 1; i <= limit; i++){
-      items.push(i);
+  changeOrder = (field: string) => {
+    if (this.orderingFilter.replace('-', '') === field.replace('-', '')){
+      this.orderingFilter = this.orderingFilter.includes('-') ? field : `-${field}`;
     }
-    return items;
+    else {
+      this.orderingFilter = field;
+    }
+    this.getDadosCircuitos(null);
   }
 
 }

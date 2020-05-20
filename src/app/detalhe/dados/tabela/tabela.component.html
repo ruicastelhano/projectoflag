@@ -11,8 +11,13 @@
     *ngFor="let column of extrasTabela.titulos; let colIndex = index"
     matColumnDef="{{column}}">
     <mat-header-cell
-      *matHeaderCellDef mat-sort-header>{{column}}</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ formatNumber(element.data[column]) }}</mat-cell>
+      *matHeaderCellDef
+      mat-sort-header
+      [matTooltip]="getToolTip(colIndex)"
+    >{{column | uppercase}}
+
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.data[column] | formatNumbers }}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="extrasTabela.titulos"></mat-header-row>
