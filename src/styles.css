@@ -1,19 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-.mat-row:nth-child(even){
-  background-color:#ececec;
+html, body {
+  height: 100%;
 }
 
-.mat-row:nth-child(odd){
-  background-color:#fafafa;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .mat-table {
   overflow-x: scroll;
+}
+
+.mat-header-cell {
+  padding: 10px 10px;
+  background: #171a1d;
+  color: white;
+  font-size: 80%;
+}
+
+.mat-row,
+.mat-header-row {
+  display: table-row;
+  min-height: 25px;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #ececec;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #fafafa;
 }
 
 .mat-cell,
@@ -34,15 +50,34 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 90%;
 }
 
-.mat-header-cell {
-  padding: 10px 10px;
-  background: #171a1d;
-  color: white;
+
+.map-marker{
+  font-family: monospace !important;
   font-size: 80%;
 }
 
-.mat-row,
-.mat-header-row {
-  display: table-row;
-  min-height: 25px;
+.legenda {
+  color: white;
+  width: 110%;
 }
+
+.legenda-item {
+  padding: 5% 10%;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.legenda-item.manha {
+  background: tomato;
+}
+
+.legenda-item.tarde {
+  background: yellowgreen;
+
+}
+
+.legenda-item.noite {
+  background: dodgerblue;
+
+}
+

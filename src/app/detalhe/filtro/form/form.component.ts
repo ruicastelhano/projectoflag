@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Modelo} from '../../../shared/interfaces/modelo';
 import {Estado} from '../../../shared/interfaces/estado';
+import {EstadoService} from '../../../shared/services/estado.service';
 
 @Component({
   selector: 'app-form',
@@ -12,7 +13,6 @@ export class FormComponent implements OnInit, AfterViewInit {
   @Input() zonas: number[] = [];
   @Input() turnos: number[] = [];
   @Input() modelos: Modelo[] = [];
-  @Output() dataChanged = new EventEmitter<Estado>();
   @ViewChild('anoElement') anoElement: ElementRef;
   @ViewChild('mesElement') mesElement: ElementRef;
   @ViewChild('zonaElement') zonaElement: ElementRef;
@@ -22,7 +22,7 @@ export class FormComponent implements OnInit, AfterViewInit {
   meses: string[];
   estado: Estado;
 
-  constructor() {
+  constructor(private estadoService: EstadoService) {
   }
 
   ngAfterViewInit(): void {
@@ -52,8 +52,8 @@ export class FormComponent implements OnInit, AfterViewInit {
       slugModelo = this.modeloElement.nativeElement.value;
     }
 
-    let anoLocal = null;
-    let mesLocal = null;
+    let anoLocal;
+    let mesLocal;
     if (mes) {
       anoLocal = parseInt(mes.substring(0, 4), 10);
       mesLocal = parseInt(mes.substring(5, 7), 10);
@@ -82,7 +82,7 @@ export class FormComponent implements OnInit, AfterViewInit {
     this.estado.turno = turno;
     this.estado.zona = zona;
     this.estado.slugModelo = slugModelo;
-    this.dataChanged.emit(this.estado);
+    this.estadoService.updateEstado(this.estado);
   }
 
   ngOnInit(): void {
@@ -113,3 +113,4 @@ export class FormComponent implements OnInit, AfterViewInit {
   }
 
 }
+

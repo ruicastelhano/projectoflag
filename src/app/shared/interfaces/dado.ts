@@ -1,4 +1,3 @@
-
 import {DadoAgrupamento} from './dado-agrupamento';
 
 export interface Dado {

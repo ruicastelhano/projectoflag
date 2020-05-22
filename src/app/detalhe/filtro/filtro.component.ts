@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Modelo} from '../../shared/interfaces/modelo';
-import {Dado} from '../../shared/interfaces/dado';
-import {Circuito} from '../../shared/interfaces/circuito';
 import {GeoJSONPolygon} from '../../shared/interfaces/geo-j-s-o-n-polygon';
 import {DadosService} from '../../shared/services/dados.service';
 import {Estado} from '../../shared/interfaces/estado';
+import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@angular/router';
 
 @Component({
   selector: 'app-filtro',
@@ -13,12 +12,11 @@ import {Estado} from '../../shared/interfaces/estado';
 })
 export class FiltroComponent implements OnInit {
   @Input() slugProduto: string;
-  @Output() dataChanged = new EventEmitter<Estado>();
+  @Input() estado: Estado;
   geojsonObject: GeoJSONPolygon;
   modelos: Modelo[] = [];
   zonas: number[];
   turnos: number[];
-  estado: Estado;
   error = null;
 
   constructor(private dadosService: DadosService) { }
@@ -37,11 +35,6 @@ export class FiltroComponent implements OnInit {
         error => {
           this.error = error.message;
         });
-  }
-
-  OnDataChanged = (data): void => {
-    this.estado = data;
-    this.dataChanged.emit(data);
   }
 
 }

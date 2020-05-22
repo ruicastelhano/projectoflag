@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input, OnChanges, OnInit, Renderer2, SimpleChanges} from '@angular/core';
+import {Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges} from '@angular/core';
 
 @Directive({
   selector: '[appBackgroundColor]'
@@ -39,12 +39,12 @@ export class BackgroundColorDirective implements OnInit, OnChanges {
           break;
       }
       if (this.index === this.activeComparativo){
-        this.renderer.removeClass(this.elRef.nativeElement, `btn-outline-${this.aux}`);
-        this.renderer.addClass(this.elRef.nativeElement, `btn-${this.aux}`);
-      }
-      else {
         this.renderer.removeClass(this.elRef.nativeElement, `btn-${this.aux}`);
         this.renderer.addClass(this.elRef.nativeElement, `btn-outline-${this.aux}`);
+      }
+      else {
+        this.renderer.removeClass(this.elRef.nativeElement, `btn-outline-${this.aux}`);
+        this.renderer.addClass(this.elRef.nativeElement, `btn-${this.aux}`);
       }
     }
 

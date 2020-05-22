@@ -1,9 +1,8 @@
 import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DadoAgrupamento} from '../../../shared/interfaces/dado-agrupamento';
-import {Extra} from '../../../shared/interfaces/extra';
 import {ExtraAgrupamento} from '../../../shared/interfaces/extra-agrupamento';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
@@ -45,4 +44,5 @@ export class TabelaComponent implements OnInit, OnChanges, AfterViewInit{
   getToolTip = (colIndex: number) => {
     return this.extrasTabela.tooltips[colIndex];
   }
+
 }

@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Dado} from '../../shared/interfaces/dado';
 import {DadosGeral} from '../../shared/interfaces/dados-geral';
 import {DadoAgrupamento} from '../../shared/interfaces/dado-agrupamento';
@@ -19,10 +10,10 @@ import {Estado} from '../../shared/interfaces/estado';
   templateUrl: './dados.component.html',
   styleUrls: ['./dados.component.css']
 })
-export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
-  @Input() slugProduto: string;
+export class DadosComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy{
+  @Input() dados: DadosGeral;
   @Input() estado: Estado;
-  @Input() dados: DadosGeral;@ViewChild('btnGlobal') btnGlobal: ElementRef;
+  @ViewChild('btnGlobal') btnGlobal: ElementRef;
   @ViewChild('btnModelos') btnModelos: ElementRef;
   @ViewChild('btnTurnos') btnTurnos: ElementRef;
   @ViewChild('btnZonas') btnZonas: ElementRef;
@@ -33,22 +24,31 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
   @ViewChild('btnAvg') btnAvg: ElementRef;
   @ViewChild('btnRat') btnRat: ElementRef;
   @ViewChild('escolhaAgrupamento') escolhaAgrupamento: ElementRef;
+  slugProduto: string;
   daodosComparativo: Dado;
   dadosAgrupamento: DadoAgrupamento[];
   extraAgrupamento: ExtraAgrupamento;
-  activeComparativo = 0;
+  activeComparativo: number;
   activeAgrupamento: number;
 
-  constructor() {}
-
-  ngOnChanges(changes: SimpleChanges) {
-     this.activeComparativo = 0;
-     if (this.escolhaAgrupamento) {
-      this.escolhaAgrupamento.nativeElement.style.display = 'none';
-     }
+  constructor() {
+    this.activeComparativo = 0;
   }
 
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    console.log('destruido');
+    }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.activeComparativo = 0;
+    if (this.escolhaAgrupamento) {
+      this.escolhaAgrupamento.nativeElement.style.display = 'none';
+    }
+  }
+
+  ngOnInit(): void {
+    this.slugProduto = this.estado.slugProduto;
+  }
 
   ngAfterViewInit(): void {
     this.prepareDOM();
@@ -76,9 +76,11 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
     this.btnSum.nativeElement.addEventListener('click', this.addBtnAgrupamentoListener.bind(this, 'sum', 1));
     this.btnAvg.nativeElement.addEventListener('click', this.addBtnAgrupamentoListener.bind(this, 'avg', 2));
     this.btnRat.nativeElement.addEventListener('click', this.addBtnAgrupamentoListener.bind(this, 'rat', 3));
-    }
+  }
 
   private addBtnComparativoListener = (tipo, int): void => {
+    console.log(tipo, int);
+    console.log(this.dados[tipo]);
     this.daodosComparativo = this.dados[tipo];
     this.activeAgrupamento = null;
     this.activeComparativo = int;

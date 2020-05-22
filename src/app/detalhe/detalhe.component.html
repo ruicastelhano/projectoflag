@@ -13,7 +13,7 @@
   <app-filtro
     *ngIf="showFiltro && slugProduto"
     [slugProduto]="slugProduto"
-    (dataChanged)="OnDataChanged($event)"
+    [estado]="estado"
   ></app-filtro>
 </section>
 
@@ -27,9 +27,8 @@
 <section class="container">
   <app-dados
     *ngIf="dados && !error"
-    [estado]="estado"
     [dados]="dados"
-    [slugProduto]="slugProduto"
+    [estado]="estado"
   ></app-dados>
 </section>
 

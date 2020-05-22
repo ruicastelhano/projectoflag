@@ -1,5 +1,5 @@
-import {AfterViewChecked, Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
 
 @Component({
@@ -7,33 +7,39 @@ import {Color, Label} from 'ng2-charts';
   templateUrl: './grafico.component.html',
   styleUrls: ['./grafico.component.css']
 })
-export class GraficoComponent implements OnInit, OnChanges {
+export class GraficoComponent implements OnInit, OnChanges{
   @Input() dados;
-  barChartOptions: ChartOptions = {
-    responsive: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          display: true,
-        },
-        scaleLabel: {
-          display: true,
-          labelString: null
-        }
-      }]
-    }
-  };
+  barChartOptions: ChartOptions;
   barChartLabels: Label[];
-  barChartType: ChartType = 'bar';
+  barChartType: ChartType;
   barChartLegend = true;
-  barChartPlugins = [];
+  barChartPlugins: any[];
   barChartData: ChartDataSets[];
-  barChartColors: Color[] = [
-    { backgroundColor: '#641E16' },
-  ];
+  barChartColors: Color[];
 
-  constructor() { }
+  constructor() {
+    this.barChartOptions = {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            display: true,
+          },
+          scaleLabel: {
+            display: true,
+            labelString: null
+          }
+        }]
+      }
+    };
+    this.barChartType = 'bar';
+    this.barChartLegend = true;
+    this.barChartPlugins = [];
+    this.barChartColors = [
+      { backgroundColor: '#641E16' },
+    ];
+  }
 
   ngOnInit() {}
 

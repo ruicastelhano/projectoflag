@@ -1,4 +1,14 @@
 
+.btn {
+  margin: 5px 15px !important;
+  padding: 15px 5px !important;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
 .btn-rub {
   background-color: #e67e22;
   border: 1px solid #e67e22;

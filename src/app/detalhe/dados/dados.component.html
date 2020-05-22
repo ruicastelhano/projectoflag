@@ -1,7 +1,7 @@
 
 <div class="row text-center align-middle mb-1 mt-2">
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
           #btnGlobal
           appBackgroundColor
           [slugProduto]="slugProduto"
@@ -9,8 +9,8 @@
           [activeComparativo]="activeComparativo"
   >Global</button>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
-          *ngIf="!dados['slug_modelo']"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
+          [disabled]="dados['slug_modelo']"
           #btnModelos
           appBackgroundColor
           [slugProduto]="slugProduto"
@@ -18,8 +18,8 @@
           [activeComparativo]="activeComparativo"
   >Circuitos</button>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
-          *ngIf="!dados['slug_modelo'] && !dados['turno']"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
+          [disabled]="dados['slug_modelo'] || dados['turno']"
           #btnTurnos
           appBackgroundColor
           [slugProduto]="slugProduto"
@@ -27,8 +27,8 @@
           [activeComparativo]="activeComparativo"
   >Turnos</button>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
-          *ngIf="!dados['slug_modelo'] && !dados['zona']"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
+          [disabled]="dados['slug_modelo'] || dados['zona']"
           #btnZonas
           appBackgroundColor
           [slugProduto]="slugProduto"
@@ -36,8 +36,8 @@
           [activeComparativo]="activeComparativo"
   >Zonas</button>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
-          *ngIf="!dados['ano']"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
+          [disabled]="dados['ano']"
           #btnAnual
           appBackgroundColor
           [slugProduto]="slugProduto"
@@ -45,8 +45,8 @@
           [activeComparativo]="activeComparativo"
   >Anual</button>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
-          *ngIf="!dados['mes']"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
+          [disabled]="dados['mes']"
           #btnMensal
           appBackgroundColor
           [slugProduto]="slugProduto"
@@ -54,7 +54,7 @@
           [activeComparativo]="activeComparativo"
   >Mensal</button>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
           #btnCircuitos
           appBackgroundColor
           [slugProduto]="slugProduto"
@@ -67,25 +67,25 @@
 <div class="row text-center align-middle mb-2 mt-4 w-100"
   #escolhaAgrupamento>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
           #btnSum
-          [ngClass]="{'btn-dark': activeAgrupamento === 1, 'btn-outline-dark': activeAgrupamento !== 1}"
+          [ngClass]="{'btn-dark': activeAgrupamento !== 1, 'btn-outline-dark': activeAgrupamento === 1}"
   >Acumulado</button>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
           #btnAvg
-          [ngClass]="{'btn-dark': activeAgrupamento === 2, 'btn-outline-dark': activeAgrupamento !== 2}"
+          [ngClass]="{'btn-dark': activeAgrupamento !== 2, 'btn-outline-dark': activeAgrupamento === 2}"
   >Mèdias</button>
 
-  <button class="h4-btn mr-2 ml-2 p-2 btn-sm text-center btn btn-block text-uppercase col"
+  <button class="btn-sm text-center btn btn-block text-uppercase col"
           #btnRat
-          [ngClass]="{'btn-dark': activeAgrupamento === 3, 'btn-outline-dark': activeAgrupamento !== 3}"
+          [ngClass]="{'btn-dark': activeAgrupamento !== 3, 'btn-outline-dark': activeAgrupamento === 3}"
   >Rácios</button>
 
 </div>
 
 <div
-  *ngIf="activeComparativo===0">
+  *ngIf="activeComparativo === 0">
 
   <div class="mt-4">
     <app-tabela
@@ -114,7 +114,7 @@
 </div>
 
 <div
-  *ngIf="activeComparativo!==0 && activeComparativo!==6">
+  *ngIf="activeComparativo !==0 && activeComparativo !== 6">
 
   <app-tabela
     *ngIf="activeAgrupamento"

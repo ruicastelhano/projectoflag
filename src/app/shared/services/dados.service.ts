@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {GeoJSONPolygon} from '../interfaces/geo-j-s-o-n-polygon';
 import {Estado} from '../interfaces/estado';

@@ -7,13 +7,13 @@ import {ExtraAgrupamento} from '../../../shared/interfaces/extra-agrupamento';
   templateUrl: './conjunto-graficos.component.html',
   styleUrls: ['./conjunto-graficos.component.css']
 })
-export class ConjuntoGraficosComponent implements OnInit, OnChanges {
+export class ConjuntoGraficosComponent implements OnInit, OnChanges{
   @Input() dadosAgrupamento: DadoAgrupamento[];
   @Input() extraAgrupamento: ExtraAgrupamento;
-  dadosGraficos: number[][];
-  labels: string[] = [];
-  titulos: string[];
-  legendaYAxis: string[];
+  private dadosGraficos: number[][];
+  private labels: string[] = [];
+  private titulos: string[];
+  private legendaYAxis: string[];
   dadosF = [];
 
   constructor() { }

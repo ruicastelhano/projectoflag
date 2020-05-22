@@ -6,25 +6,28 @@
 </div>
 
 <app-spinner
-  *ngIf="!modelos && !error">
+  *ngIf="(!modelos || modelos.length === 0 || !geojsonObject) && !error">
 </app-spinner>
 
-<div class="row">
-  <div class="col-md-4"
-       *ngIf="!error">
-    <app-form
-      [slugProduto]="slugProduto"
-      [modelos]="modelos"
-      [zonas]="zonas"
-      [turnos]="turnos"
-      (dataChanged)="OnDataChanged($event)"
-    ></app-form>
-  </div>
-  <div class="col-md-8">
-    <app-mapa
-      [geojsonObject]="geojsonObject"
-    ></app-mapa>
-  </div>
-</div>
+<section
+  *ngIf="!error && modelos.length > 0 && geojsonObject">
 
+  <div class="row">
+    <div class="col-md-4">
+      <app-form
+        [slugProduto]="slugProduto"
+        [modelos]="modelos"
+        [zonas]="zonas"
+        [turnos]="turnos"
+      ></app-form>
+    </div>
+    <div class="col-md-8">
+      <app-mapa-l
+        [geojsonObject]="geojsonObject"
+      ></app-mapa-l>
+    </div>
+  </div>
+
+
+</section>
 
