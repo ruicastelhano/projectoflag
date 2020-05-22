@@ -9,42 +9,6 @@ button:disabled {
   pointer-events: all !important;
 }
 
-.btn-rub {
-  background-color: #e67e22;
-  border: 1px solid #e67e22;
-  color: white;
-}
-
-.btn-rub:hover {
-  background-color: #d35400;
-  border: 1px solid #d35400;
-  color: white;
-}
-
-.btn-outline-rub {
-  background-color: #ffffff;
-  border: 1px solid #e67e22;
-  color: #e67e22;
-}
-
-.btn-outline-rub:hover {
-  background-color: #e67e22;
-  border: 1px solid #e67e22;
-  color: white;
-}
-
-.btn-ofu {
-  background-color: #9b59b6;
-  border: 1px solid #9b59b6;
-  color: white;
-}
-
-.btn-ofu:hover {
-  background-color: #8e44ad;
-  border: 1px solid #8e44ad;
-  color: white;
-}
-
 .btn-outline-ofu {
   background-color: #ffffff;
   border: 1px solid #9b59b6;

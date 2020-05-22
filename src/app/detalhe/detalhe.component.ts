@@ -15,15 +15,16 @@ import {EstadoService} from '../shared/services/estado.service';
 export class DetalheComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('toggleFiltroButton') toggleFiltroButton: ElementRef;
   @Output() slugProduto: string;
+  private unsubscribeAPI: Subject<void>;
   dados: DadosGeral;
   estado: Estado;
-  error = null;
-  showFiltro = false;
-  unsubscribeAPI: Subject<void> = new Subject<void>();
+  error: string;
+  showFiltro: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private dadosService: DadosService,
-              private estadoService: EstadoService) { }
+  constructor(private activatedRoute: ActivatedRoute, private dadosService: DadosService,  private estadoService: EstadoService) {
+    this.unsubscribeAPI = new Subject<void>();
+    this.showFiltro = false;
+  }
 
   ngAfterViewInit(): void {
     this.toggleFiltroButton.nativeElement.addEventListener('click', this.toggleShowFiltro);
@@ -50,6 +51,7 @@ export class DetalheComponent implements OnInit, AfterViewInit, OnDestroy {
       turno: null,
       slugModelo: null,
     };
+    this.estadoService.setEstado(this.estado);
     this.getDadosData();
   }
 

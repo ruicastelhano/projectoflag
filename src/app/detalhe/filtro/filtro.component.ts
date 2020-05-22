@@ -2,8 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Modelo} from '../../shared/interfaces/modelo';
 import {GeoJSONPolygon} from '../../shared/interfaces/geo-j-s-o-n-polygon';
 import {DadosService} from '../../shared/services/dados.service';
-import {Estado} from '../../shared/interfaces/estado';
-import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@angular/router';
 
 @Component({
   selector: 'app-filtro',
@@ -12,7 +10,6 @@ import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@
 })
 export class FiltroComponent implements OnInit {
   @Input() slugProduto: string;
-  @Input() estado: Estado;
   geojsonObject: GeoJSONPolygon;
   modelos: Modelo[] = [];
   zonas: number[];

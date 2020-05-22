@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Dado} from '../../shared/interfaces/dado';
 import {DadosGeral} from '../../shared/interfaces/dados-geral';
 import {DadoAgrupamento} from '../../shared/interfaces/dado-agrupamento';
@@ -10,7 +10,7 @@ import {Estado} from '../../shared/interfaces/estado';
   templateUrl: './dados.component.html',
   styleUrls: ['./dados.component.css']
 })
-export class DadosComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy{
+export class DadosComponent implements OnInit, AfterViewInit, OnChanges{
   @Input() dados: DadosGeral;
   @Input() estado: Estado;
   @ViewChild('btnGlobal') btnGlobal: ElementRef;
@@ -35,12 +35,10 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
     this.activeComparativo = 0;
   }
 
-  ngOnDestroy(): void {
-    console.log('destruido');
-    }
-
   ngOnChanges(changes: SimpleChanges) {
-    this.activeComparativo = 0;
+    if (this.activeComparativo !== 6) {
+      this.activeComparativo = 0;
+    }
     if (this.escolhaAgrupamento) {
       this.escolhaAgrupamento.nativeElement.style.display = 'none';
     }
@@ -79,8 +77,6 @@ export class DadosComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   }
 
   private addBtnComparativoListener = (tipo, int): void => {
-    console.log(tipo, int);
-    console.log(this.dados[tipo]);
     this.daodosComparativo = this.dados[tipo];
     this.activeAgrupamento = null;
     this.activeComparativo = int;

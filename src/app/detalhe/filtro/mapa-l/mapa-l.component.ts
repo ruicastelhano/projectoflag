@@ -1,12 +1,11 @@
-import {AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {GeoJSONPolygon} from '../../../shared/interfaces/geo-j-s-o-n-polygon';
 import * as L from 'leaflet';
-import {circle, latLng, Layer, polygon, tileLayer} from 'leaflet';
+import {tileLayer} from 'leaflet';
 import {EstadoService} from '../../../shared/services/estado.service';
-import {takeUntil, tap} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import {Estado} from '../../../shared/interfaces/estado';
 import {Subject} from 'rxjs';
-import {Circuito} from '../../../shared/interfaces/circuito';
 
 @Component({
   selector: 'app-mapa-l',
@@ -59,6 +58,7 @@ export class MapaLComponent implements OnInit, OnDestroy, AfterViewChecked {
   onMapReady(map) {
     this.map = map;
     this.createLegend();
+    this.addAttributionControl('Licensed by &copy; <a href="https://ambiente.cascais.pt/" target="_blank">Cascais Ambiente</a>');
   }
 
   private updateGeoJSON = () => {
@@ -82,16 +82,18 @@ export class MapaLComponent implements OnInit, OnDestroy, AfterViewChecked {
       this.map.removeLayer(marker);
     });
     this.layers = [];
-    this.layers.push(L.geoJSON(this.geojsonFiltrado,
-      {
-        style: this.style,
-        onEachFeature: this.onEachFeature,
-      }));
-    try{
-      this.mapFitToBoundsOptions = {maxZoom: 18, animate: true};
-      this.mapFitToBounds = this.layers[0].getBounds();
+    if (this.geojsonFiltrado.features.reduce((acu, val) => acu + (val.geometry !== null ? 1 : 0), 0) !== 0){
+      this.layers.push(L.geoJSON(this.geojsonFiltrado,
+        {
+          style: this.style,
+          onEachFeature: this.onEachFeature,
+        }));
+      try{
+        this.mapFitToBoundsOptions = {maxZoom: 18, animate: true};
+        this.mapFitToBounds = this.layers[0].getBounds();
+      }
+      catch (e) {}
     }
-    catch (e) {}
   }
 
   onEachFeature = (feature, layer): void => {
@@ -143,8 +145,11 @@ export class MapaLComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.legenda.addTo(this.map);
   }
 
+  private addAttributionControl = (link: string) => {
+    this.map.attributionControl.addAttribution(link);
+  }
+
   ngOnDestroy() {
-    console.log('destruido');
     this.unsubscribeEstado.next();
     this.unsubscribeEstado.complete();
   }

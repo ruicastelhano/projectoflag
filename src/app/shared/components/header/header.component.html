@@ -1,37 +1,30 @@
 
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark navbar-default navbar-static-top pb-3">
-  <div class="container-fluid vertical-center nav_div">
-    <ul class="nav mr-auto vertical-center text-white">
-      <a class="nav-brand mr-4" href="#">
-        <img alt="favicon" title="Início" width="100%" src="../../../../favicon.ico"/>
-      </a>
+<section class="bg-dark pb-3 pt-3">
+  <div class="container">
+    <a class="nav-icon" href="#">
+      <img alt="favicon" title="Início" width="60px" src="../../../../favicon.ico"/>
+    </a>
+    <mat-menu #aboveMenu="matMenu" yPosition="above">
 
+    </mat-menu>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <button mat-button [matMenuTriggerFor]="belowMenu"
+            class="text-white"
+    >Recolha</button>
+    <mat-menu #belowMenu="matMenu" yPosition="below">
+      <a mat-menu-item href="/ind">Indiferenciado</a>
+      <a mat-menu-item href="/pap">Papel</a>
+      <a mat-menu-item href="/pla">Plástico</a>
+      <a mat-menu-item href="/vid">Vidro</a>
+      <a mat-menu-item href="/rub">RUB</a>
+    </mat-menu>
 
-      <div class="collapse navbar-collapse" id="navbar1">
-        <ul class="navbar-nav nav nav-fill w-100">
-          <li class="ws">
-            <a class="nav-link" href="#">Recolha</a>
-            <ul class="sub">
-              <li><a class="nav-link" href="/ind">Indiferenciado</a></li>
-              <li><a class="nav-link" href="/pap">Papel</a></li>
-              <li><a class="nav-link" href="/pla">Plástico</a></li>
-              <li><a class="nav-link" href="/vid">Vidro</a></li>
-              <li><a class="nav-link" href="/rub">RUB</a></li>
-            </ul>
-          </li>
-          <li class="ws">
-            <a class="nav-link" href="#">Limpeza</a>
-            <ul class="sub">
-              <li><a class="nav-link" href="/cj">Cortes de jardim</a></li>
-              <li><a class="nav-link" href="/ofu">Objectos fora de uso</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </ul>
+    <button mat-button [matMenuTriggerFor]="beforeMenu"
+            class="text-white"
+    >Limpeza</button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <a mat-menu-item href="/cj">Cortes de jardim</a>
+      <a mat-menu-item href="/ofu">Objectos fora de uso</a>
+    </mat-menu>
   </div>
-</nav>
+</section>

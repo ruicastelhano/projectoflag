@@ -26,6 +26,21 @@ export class FormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if (this.estado.slugModelo){
+      this.modeloElement.nativeElement.value = this.estado.slugModelo;
+    }
+    if (this.estado.zona){
+      this.zonaElement.nativeElement.value = this.estado.zona;
+    }
+    if (this.estado.turno){
+      this.turnoElement.nativeElement.value = this.estado.turno;
+    }
+    if (this.estado.ano){
+      this.anoElement.nativeElement.value = this.estado.ano;
+    }
+    if (this.estado.mes){
+      this.mesElement.nativeElement.value = `${this.estado.ano}/${this.estado.mes}`;
+    }
     this.getEstado();
   }
 
@@ -82,19 +97,12 @@ export class FormComponent implements OnInit, AfterViewInit {
     this.estado.turno = turno;
     this.estado.zona = zona;
     this.estado.slugModelo = slugModelo;
+    this.estadoService.setEstado(this.estado);
     this.estadoService.updateEstado(this.estado);
   }
 
   ngOnInit(): void {
-    this.estado = {
-      slugProduto: this.slugProduto,
-      ano: null,
-      mes: null,
-      zona: null,
-      turno: null,
-      slugModelo: null,
-    };
-
+    this.estado = this.estadoService.getEstado();
     this.anos = [];
     this.meses = [];
     let ano = new Date().getFullYear();
@@ -112,5 +120,13 @@ export class FormComponent implements OnInit, AfterViewInit {
     }
   }
 
+  limpar = () => {
+    this.anoElement.nativeElement.value = 'Todos (>=2018)';
+    this.zonaElement.nativeElement.value = 'Todas';
+    this.turnoElement.nativeElement.value = 'Todos';
+    this.modeloElement.nativeElement.value = 'Todos';
+    this.mesElement.nativeElement.value = 'Todos';
+    this.getEstado();
+  }
 }
 

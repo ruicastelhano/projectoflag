@@ -10,7 +10,6 @@ import {IntroComponent} from './intro/intro/intro.component';
 import {FiltroComponent} from './detalhe/filtro/filtro.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RouterModule} from '@angular/router';
-import {MapaComponent} from './detalhe/filtro/mapa/mapa.component';
 import {DetalheComponent} from './detalhe/detalhe.component';
 import {FormComponent} from './detalhe/filtro/form/form.component';
 import {DadosComponent} from './detalhe/dados/dados.component';
@@ -20,7 +19,6 @@ import {ChartsModule} from 'ng2-charts';
 import {FormsModule} from '@angular/forms';
 import {BackgroundColorDirective} from './shared/directives/background-color.directive';
 import {ConjuntoGraficosComponent} from './detalhe/dados/conjunto-graficos/conjunto-graficos.component';
-import {ToggleDisplayDirective} from './shared/directives/toggle-display.directive';
 import {ListaCircuitosComponent} from './detalhe/dados/lista-circuitos/lista-circuitos.component';
 import {MaterialModule} from './material.module';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
@@ -42,7 +40,6 @@ import {MapaLComponent} from './detalhe/filtro/mapa-l/mapa-l.component';
     FooterComponent,
     IntroComponent,
     FiltroComponent,
-    MapaComponent,
     DetalheComponent,
     FormComponent,
     DadosComponent,
@@ -50,26 +47,25 @@ import {MapaLComponent} from './detalhe/filtro/mapa-l/mapa-l.component';
     GraficoComponent,
     BackgroundColorDirective,
     ConjuntoGraficosComponent,
-    ToggleDisplayDirective,
     ListaCircuitosComponent,
     SpinnerComponent,
     MapaLComponent,
     FormatNumbersPipe,
     CamelCaseToTitlePipe,
   ],
-    imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
-        NgbModule,
-        AppRoutingModule,
-        RouterModule,
-        HttpClientModule,
-        ChartsModule,
-        FormsModule,
-        MaterialModule,
-        MatPaginatorModule,
-        LeafletModule,
-    ],
+  imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
+    NgbModule,
+    AppRoutingModule,
+    RouterModule,
+    HttpClientModule,
+    ChartsModule,
+    FormsModule,
+    MaterialModule,
+    MatPaginatorModule,
+    LeafletModule,
+  ],
   providers: [
     {
       provide: MatPaginatorIntl,

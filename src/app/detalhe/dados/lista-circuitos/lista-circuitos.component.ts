@@ -51,10 +51,10 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngOnInit(): void {
     this.estadoService.onUpdateEstado()
-      .pipe(tap(v => console.log(this.estado, v)))
       .pipe(takeUntil(this.unsubscribeEstado))
       .subscribe((novoEstado) => {
           this.estado = novoEstado;
+          this.currentPage = 1;
           this.getDadosCircuitos(null);
         },
         error => { this.error = error.message; }
@@ -70,15 +70,17 @@ export class ListaCircuitosComponent implements OnInit, AfterViewInit, OnDestroy
       .pipe(map((data: any) => {
         data.results.forEach(row => {delete row.circuito; });
         this.resultadosSize = data.count;
-        if (data.next) {this.next = data.next; }
-        if (data.previous) {this.previous = data.previous; }
+        this.next = data.next;
+        this.previous = data.previous;
         return data.results;
       }))
       .subscribe((data: any) => {
           this.circuitos = data;
           this.dataSource.data = this.circuitos;
           this.paginas = Math.ceil(this.resultadosSize / this.pageSize);
-          if (!this.columns) {this.columns = Object.keys(this.circuitos[0]); }
+          if (!this.columns) {
+            this.columns = Object.keys(this.circuitos[0]);
+          }
         },
         error => {this.error = error.message; }
       );

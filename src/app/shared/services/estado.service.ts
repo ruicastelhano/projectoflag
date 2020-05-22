@@ -7,6 +7,7 @@ import {Estado} from '../interfaces/estado';
 })
 export class EstadoService {
   private estado$ = new Subject<Estado>();
+  private estado: Estado;
 
   updateEstado = (novoEstado: Estado) => {
     this.estado$.next(novoEstado);
@@ -14,6 +15,14 @@ export class EstadoService {
 
   onUpdateEstado = () => {
     return this.estado$.asObservable();
+  }
+
+  getEstado = () => {
+    return this.estado;
+  }
+
+  setEstado = (estado: Estado) => {
+    this.estado = estado;
   }
 
 }
